@@ -48,6 +48,7 @@ import javax.swing.JTabbedPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.ScrollPaneConstants;
+import javax.swing.SwingConstants;
 import javax.swing.UIManager;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
@@ -116,6 +117,7 @@ class Gui extends JFrame{
 	JLabel backgroundSaveImageLabel;
 	JLabel backgroundCreateImageLabel;
 
+	JLabel versionInfoLabel;
 	JLabel welcomeLabel;
 	JLabel sourceLabel;
 	JLabel destinationLabel;
@@ -447,6 +449,11 @@ class Gui extends JFrame{
 
 	private void initializeTextLabels() {
 
+		versionInfoLabel = new JLabel("SIP-Builder v" + Utilities.getSipBuilderVersion() + 
+				" ®2011-2014 Historisch-Kulturwissenschaftliche Informationsverarbeitung");
+		versionInfoLabel.setFont(standardFont.deriveFont(10.0f));
+		versionInfoLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		versionInfoLabel.setForeground(Color.WHITE);
 		welcomeLabel = new JLabel("Herzlich Willkommen im SIP-Builder!");
 		welcomeLabel.setFont(boldFont.deriveFont(12.0f));
 		sourceLabel = new JLabel("Quellordner:");
@@ -1346,7 +1353,8 @@ class Gui extends JFrame{
 
 		// Positioning of textfields, buttons etc.
 
-		// overall buttons
+		// overall elements
+		versionInfoLabel.setBounds(0, 472, 750, 20);
 		startActivatedIconButton.setBounds(10, 70, 171, 20);
 		startIconButton.setBounds(10, 70, 171, 20);
 		loadActivatedIconButton.setBounds(10, 95, 171, 20);
@@ -1599,8 +1607,8 @@ class Gui extends JFrame{
 		getContentPane().add(saveIconButton);
 		getContentPane().add(createActivatedIconButton);
 		getContentPane().add(createIconButton);
-
 		getContentPane().add(helpIconButton);
+		getContentPane().add(versionInfoLabel);
 
 		getContentPane().add(startPanel);
 		startPanel.add(welcomeLabel);
@@ -1808,7 +1816,7 @@ class Gui extends JFrame{
 		helpIconButton.addActionListener(new ActionListener(){
 
 			public void actionPerformed(ActionEvent e){
-				messageWriter.showMessage("DA NRW SIP-Builder Version " + Utilities.getSipBuilderVersion() + "\n\n" +
+				messageWriter.showMessage("DA NRW SIP-Builder v" + Utilities.getSipBuilderVersion() + "\n\n" +
 										  "Copyright (C) 2013 Historisch-Kulturwissenschaftliche\n" +
 										  "Informationsverarbeitung Universität zu Köln\n\n" +
 										  "www.danrw.de");
