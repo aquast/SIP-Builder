@@ -19,7 +19,6 @@
 
 package de.uzk.hki.da.sb;
 
-import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -31,31 +30,33 @@ import org.apache.commons.compress.compressors.gzip.GzipCompressorOutputStream;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
 
-class TarGzArchiveBuilder {
+class ArchiveBuilder {
 	
 	private ProgressManager progressManager;
 	private int jobId;
 	private SIPFactory.SipBuildingProcess sipBuildingProcess;
 
-	public boolean archiveFolder(File srcFolder, File destFile, boolean includeFolder)
+	public boolean archiveFolder(File srcFolder, File destFile, boolean includeFolder, boolean compress)
 			throws Exception {
 
 		FileOutputStream fOut = null;
-		BufferedOutputStream bOut = null;
 		GzipCompressorOutputStream gzOut = null;
 		TarArchiveOutputStream tOut = null;
 
 		try {
 			fOut = new FileOutputStream(destFile);
-			bOut = new BufferedOutputStream(fOut);
-			gzOut = new GzipCompressorOutputStream(fOut);
-			tOut = new TarArchiveOutputStream(gzOut, "UTF-8");
+			
+			if (compress) {
+				gzOut = new GzipCompressorOutputStream(fOut);
+				tOut = new TarArchiveOutputStream(gzOut, "UTF-8");
+			} else
+				tOut = new TarArchiveOutputStream(fOut, "UTF-8");
 
 			tOut.setLongFileMode(TarArchiveOutputStream.LONGFILE_GNU);
 			tOut.setBigNumberMode(2);
 
 			if (includeFolder) {
-				if (!addFileToTarGZ(tOut,srcFolder,""))
+				if (!addFileToArchive(tOut,srcFolder,""))
 					return false;
 			}
 			else
@@ -63,7 +64,7 @@ class TarGzArchiveBuilder {
 				File children[] = srcFolder.listFiles();
 
 				for (int i = 0; i < children.length; i++) {
-					if (!addFileToTarGZ(tOut,children[i],""))
+					if (!addFileToArchive(tOut,children[i],""))
 						return false;
 				}
 			}
@@ -71,10 +72,9 @@ class TarGzArchiveBuilder {
 		finally
 		{
 			tOut.finish();
-
 			tOut.close();
-			gzOut.close();
-			bOut.close();
+			if (gzOut != null)
+				gzOut.close();
 			fOut.close();
 		}
 
@@ -87,7 +87,7 @@ class TarGzArchiveBuilder {
 	 * @param base
 	 * @throws IOException
 	 */
-	private boolean addFileToTarGZ(TarArchiveOutputStream tOut, File file, String base) throws IOException{
+	private boolean addFileToArchive(TarArchiveOutputStream tOut, File file, String base) throws IOException{
 
 		if (sipBuildingProcess.isAborted())
 			return false;
@@ -115,7 +115,7 @@ class TarGzArchiveBuilder {
 
 			for (int i = 0; i < children.length; i++) {
 
-				if (!addFileToTarGZ(tOut, children[i], entryName + "/"))
+				if (!addFileToArchive(tOut, children[i], entryName + "/"))
 					return false;
 			}
 		}

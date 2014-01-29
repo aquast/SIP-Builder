@@ -102,6 +102,7 @@ class Cli {
     	sipFactory.setKindofSIPBuilding(SIPFactory.KindOfSIPBuilding.MULTIPLE_FOLDERS);
     	sipFactory.setCreateCollection(false);
     	sipFactory.setIgnoreZeroByteFiles(true);
+    	sipFactory.setCompress(true);
     	sipFactory.setProgressManager(new CliProgressManager());
  	
     	// User settings
@@ -198,6 +199,11 @@ class Cli {
     		
     		if (arg.startsWith("-ignoreExtensions")) {
     			sipFactory.setForbiddenFileExtensions(extractParameters(arg));
+    			continue;
+    		}
+    		
+    		if (arg.equals("-noCompression")) {
+    			sipFactory.setCompress(false);
     			continue;
     		}
     		
@@ -626,6 +632,9 @@ class Cli {
 		System.out.println("   -single=\"[Name]\"          Einzelnes SIP mit dem angegebenen Namen aus dem Quellordner erstellen");
 		System.out.println("");
 		System.out.println("   -collection=\"[Name]\"      SIPs zu einer Lieferung bündeln");
+		System.out.println("");
+		System.out.println("   -compression              SIPs als komprimierte tgz-Files erstellen (Standard)");
+		System.out.println("   -noCompression            SIPs als unkomprimierte tar-Files erstellen");
 		System.out.println("");
 		System.out.println("   -neverOverwrite           SIPs nicht erstellen, wenn sich im Zielordner bereits ein SIP gleichen Namens befindet (Standard)");
 		System.out.println("   -alwaysOverwrite          Bereits existierende SIPs/Lieferungen gleichen Namens im Zielordner ohne Nachfrage überschreiben");

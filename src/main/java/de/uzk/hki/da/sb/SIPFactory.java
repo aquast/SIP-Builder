@@ -50,6 +50,7 @@ public class SIPFactory {
 	private boolean alwaysOverwrite;
 	private boolean skippedFiles;
 	private boolean ignoreZeroByteFiles = false;
+	private boolean compress;
 
 	private List<String> forbiddenFileExtensions = null;
 
@@ -206,10 +207,15 @@ public class SIPFactory {
 			return feedback;
 		}
 
-		File tgzFile = new File(destinationPath + File.separator + packageName + ".tgz");
+		String archiveFilePath = destinationPath + File.separator + packageName;
+		if (compress)
+			archiveFilePath += ".tgz";
+		else
+			archiveFilePath += ".tar";		
+		File archiveFile = new File(archiveFilePath);
 
-		if ((feedback = buildArchive(jobId, packageFolder, tgzFile)) != Feedback.SUCCESS) {
-			rollback(tempFolder, tgzFile);
+		if ((feedback = buildArchive(jobId, packageFolder, archiveFile)) != Feedback.SUCCESS) {
+			rollback(tempFolder, archiveFile);
 			return feedback;
 		}
 
@@ -217,7 +223,7 @@ public class SIPFactory {
 			return feedback;
 
 		if (createCollection) {
-			if ((feedback = moveSipToCollectionFolder(jobId, tgzFile)) != Feedback.SUCCESS)
+			if ((feedback = moveSipToCollectionFolder(jobId, archiveFile)) != Feedback.SUCCESS)
 				return feedback;
 		}
 
@@ -307,13 +313,13 @@ public class SIPFactory {
 		progressManager.setJobFolderSize(jobId, FileUtils.sizeOfDirectory(folder));
 		progressManager.archiveProgress(jobId, 0);
 
-		TarGzArchiveBuilder archiveBuilder = new TarGzArchiveBuilder();
+		ArchiveBuilder archiveBuilder = new ArchiveBuilder();
 		archiveBuilder.setProgressManager(progressManager);
 		archiveBuilder.setJobId(jobId);
 		archiveBuilder.setSipBuildingProcess(sipBuildingProcess);
 
 		try {
-			if (!archiveBuilder.archiveFolder(folder, archiveFile, true))
+			if (!archiveBuilder.archiveFolder(folder, archiveFile, true, compress))
 				return Feedback.ABORT;
 		} catch (Exception e) {
 			logger.log("ERROR: Failed to archive folder " + folder.getAbsolutePath() + " to archive " +
@@ -548,6 +554,14 @@ public class SIPFactory {
 
 	public Feedback getReturnCode() {
 		return returnCode;
+	}
+
+	public boolean getCompress() {
+		return compress;
+	}
+
+	public void setCompress(boolean compress) {
+		this.compress = compress;
 	}
 
 

@@ -266,6 +266,7 @@ class Gui extends JFrame{
 	JCheckBox publicAudioRestrictionCheckBox;
 	JCheckBox publicVideoRestrictionCheckBox;
 	JCheckBox publicVideoDurationCheckBox;
+	JCheckBox compressionCheckBox;
 
 
 	// Textfields     
@@ -1047,8 +1048,8 @@ class Gui extends JFrame{
 		createArea.setFont(standardFont.deriveFont(12.0f));
 		createArea.setText("Wenn Sie mit den vorgenommenen Einstellungen zufrieden sind, können Sie " +
 				"die SIP-Generierung starten, indem Sie den Button \"Erstellen\" betätigen.\n\n" +
-				"Je nach Menge der zu verarbeitenden Daten und der Leistungsfähigkeit Ihres Systems " +
-				"kann der Vorgang zwischen wenigen Sekunden und mehreren Stunden in Anspruch nehmen.");
+				"Sie können den Prozess beschleunigen, indem Sie die Kompression deaktivieren. " +
+				"Bitte beachten Sie, dass in diesem Fall größere SIP-Dateien erzeugt werden.");
 	}
 
 	private void initializeRadioButtons() {
@@ -1156,6 +1157,9 @@ class Gui extends JFrame{
 		publicVideoDurationCheckBox = new JCheckBox("Länge von Videos begrenzen", false);
 		publicVideoDurationCheckBox.setOpaque(false);
 		publicVideoDurationCheckBox.setFont(standardFont.deriveFont(12.0f));
+		compressionCheckBox = new JCheckBox("SIP-Datei komprimieren", true);
+		compressionCheckBox.setOpaque(false);
+		compressionCheckBox.setFont(standardFont.deriveFont(12.0f));
 	}
 
 	private void initializeTextFields() {
@@ -1555,10 +1559,11 @@ class Gui extends JFrame{
 		// createPanel
 		createPanel.setBounds(0, 0, 750, 526);
 		createLabel.setBounds(255, 70, 350, 20);
-		createArea.setBounds(255, 100, 400, 140);
-		progressBar.setBounds(255, 250, 350, 20);
-		sipProgressDisplayLabel.setBounds(255, 275, 350, 20);
-		sipProgressStepLabel.setBounds(255, 300, 350, 20);
+		createArea.setBounds(255, 100, 400, 110);
+		compressionCheckBox.setBounds(251, 220, 175, 20);
+		progressBar.setBounds(255, 260, 350, 20);
+		sipProgressDisplayLabel.setBounds(255, 285, 350, 20);
+		sipProgressStepLabel.setBounds(255, 310, 350, 20);
 		goBackToSaveButton.setBounds(450, 445, 90, 20);
 		createButton.setBounds(575, 445, 90, 20);
 		abortButton.setBounds(575, 445, 90, 20);
@@ -1784,6 +1789,7 @@ class Gui extends JFrame{
 		getContentPane().add(createPanel);
 		createPanel.add(createLabel);
 		createPanel.add(createArea);
+		createPanel.add(compressionCheckBox);
 		createPanel.add(createButton);
 		createPanel.add(abortButton);
 		createPanel.add(quitButton);
@@ -2072,6 +2078,7 @@ class Gui extends JFrame{
 		createButton.addActionListener(new ActionListener(){
 
 			public void actionPerformed(ActionEvent e){
+				compressionCheckBox.setEnabled(false);
 				createButton.setEnabled(false);
 				createButton.setVisible(false);
 				abortButton.setEnabled(true);
@@ -2110,6 +2117,7 @@ class Gui extends JFrame{
 						new GuiProgressManager(progressBar,
 								sipProgressDisplayLabel, sipProgressStepLabel);
 
+				sipFactory.setCompress(compressionCheckBox.isSelected());
 				sipFactory.setProgressManager(progressManager);
 				sipFactory.setMessageWriter(messageWriter);
 				sipFactory.startSIPBuilding();
@@ -2120,6 +2128,7 @@ class Gui extends JFrame{
 
 			public void actionPerformed(ActionEvent e){
 				abortButton.setEnabled(false);
+				compressionCheckBox.setEnabled(true);
 				sipFactory.abort();
 			}
 		});
@@ -2573,6 +2582,23 @@ class Gui extends JFrame{
 				}     
 			}
 		});
+		
+		compressionCheckBox.addActionListener(new ActionListener() {
+			
+			public void actionPerformed(ActionEvent e){
+				quitButton.setEnabled(false);
+				quitButton.setVisible(false);
+				createButton.setEnabled(true);
+				createButton.setVisible(true);
+				
+				String compressionSetting = String.valueOf(compressionCheckBox.isSelected()); 
+				try {
+					Utilities.writeFile(new File(dataFolderPath + File.separator + "compSetting.sav"), compressionSetting);
+				} catch (Exception ex) {
+					logger.log("WARNING: Failed to create file " + new File(dataFolderPath + File.separator + "compSetting.sav").getAbsolutePath(), ex);
+				}
+			}			
+		});
 
 		kindOfSIPBuildingDropDown.addActionListener(new ActionListener(){
 			
@@ -2638,6 +2664,7 @@ class Gui extends JFrame{
 				if (progressBar.getValue() == 100 ||
 						!progressBar.isEnabled()) {
 
+					compressionCheckBox.setEnabled(true);
 					abortButton.setEnabled(false);
 					abortButton.setVisible(false);
 
@@ -2685,6 +2712,7 @@ class Gui extends JFrame{
 		File destinationFolderFile = new File(dataFolderPath + File.separator + "destPath.sav");
 		File contractRightsLoadFolderFile = new File(dataFolderPath + File.separator + "crloadPath.sav");
 		File contractRightsSaveFolderFile = new File(dataFolderPath + File.separator + "crsavePath.sav");
+		File compressionSettingFile = new File(dataFolderPath + File.separator + "compSetting.sav");
 
 		if (sourceFolderFile.exists()) {
 			try {
@@ -2720,7 +2748,16 @@ class Gui extends JFrame{
 			} catch (Exception e) {
 				logger.log("WARNING: Failed to read file " + contractRightsSaveFolderFile.getAbsolutePath(), e);
 			}
-		}		 
+		}
+		
+		if (compressionSettingFile.exists()) {
+			try {
+				String compressionSetting = Utilities.readFile(compressionSettingFile);
+				compressionCheckBox.setSelected(Boolean.valueOf(compressionSetting));
+			} catch (Exception e) {
+				logger.log("WARNING: Failed to read file " + compressionSettingFile.getAbsolutePath(), e);
+			}
+		}
 	}
 
 	private boolean leaveSection() {
