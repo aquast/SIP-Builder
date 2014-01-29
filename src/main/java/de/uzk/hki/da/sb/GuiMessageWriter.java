@@ -1,6 +1,6 @@
-/**
+/*
   DA NRW Software Suite | SIP-Builder
-  Copyright (C) 2013 Historisch-Kulturwissenschaftliche Informationsverarbeitung
+  Copyright (C) 2014 Historisch-Kulturwissenschaftliche Informationsverarbeitung
   Universität zu Köln
 
   This program is free software: you can redistribute it and/or modify
