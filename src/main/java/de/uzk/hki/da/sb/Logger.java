@@ -27,6 +27,9 @@ import java.io.PrintWriter;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+/**
+ * Can be used to write log messages into the SIP-Builder's log file
+ */
 class Logger {
 
 	private File logfile;
@@ -37,6 +40,12 @@ class Logger {
 		logfile = new File(dataPath + "/sipbuilder_errors.log");
 	}
 
+	/**
+	 * Writes a message into the log file
+	 * 
+	 * @param message The message to write
+	 * @author Thomas Kleinke
+	 */
 	public void log(String message) {
 		
 		try {
@@ -50,6 +59,13 @@ class Logger {
 		}
 	}
 	
+	/**
+	 * Writes a message into the log file and appends the stack trace of an exception
+	 * 
+	 * @param message The message to write
+	 * @param exception The exception
+	 * @author Thomas Kleinke
+	 */
 	public void log(String message, Exception exception) {
 		
 		try {

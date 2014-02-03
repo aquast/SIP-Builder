@@ -34,7 +34,9 @@ import org.apache.commons.lang.SystemUtils;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 
-
+/**
+ * Main class; starts GUI or CLI mode
+ */
 class SIPBuilder {
 	
 	private static Logger logger = Logger.getRootLogger();	
@@ -70,6 +72,13 @@ class SIPBuilder {
 		    startCLIMode(confFolderPath, dataFolderPath, args);
     }
     
+    /**
+     * Starts the SIP-Builder in GUI mode
+     * 
+     * @param confFolderPath Path to conf folder
+     * @param dataFolderPath Path to data folder
+     * @author Thomas Kleinke
+     */
     private static void startGUIMode(String confFolderPath, String dataFolderPath) {
     	
     	try {
@@ -90,6 +99,13 @@ class SIPBuilder {
     	gui.setTitle("DA NRW SIP-Builder");
     }
     
+    /**
+     * Starts the SIP-Builder in CLI mode
+     * 
+     * @param confFolderPath Path to conf folder
+     * @param dataFolderPath Path to data folder
+     * @param args The CLI arguments passed over by the user
+     */
     private static void startCLIMode(String confFolderPath, String dataFolderPath, String[] args) {
     
     	Cli cli = new Cli(confFolderPath, dataFolderPath, args);

@@ -19,20 +19,37 @@
 
 package de.uzk.hki.da.sb;
 
+/**
+ * A specialized progress manager responsible for updating the progress bar in CLI mode 
+ */
 class CliProgressManager extends ProgressManager {
 	
 	private long copiedFilesFromListCount = 0; 
 	
+	/**
+	 * Creates an abort message
+	 * @author Thomas Kleinke
+	 */
 	@Override
 	public void abort() {
 		System.out.println("\nSIP-Erstellungsvorgang abgebrochen");
 	}
 
+	/**
+	 * Creates a start message
+	 * @author Thomas Kleinke
+	 */
 	@Override
 	public void createStartMessage() {
 		System.out.println("\n\nSIP-Erstellung läuft...");
 	}
 	
+	/**
+	 * Informs the progress manager that a certain job is active now
+	 * 
+	 * @param id The ID of the job to start
+	 * @author Thomas Kleinke
+	 */
 	@Override
 	public void startJob(int id) {
 		
@@ -42,6 +59,13 @@ class CliProgressManager extends ProgressManager {
 		updateProgressBar();
 	}
 	
+	/**
+	 * Updates the copy progress
+	 * 
+	 * @param id The job ID
+	 * @param processedData The amount of data already copied
+	 * @author Thomas Kleinke
+	 */
 	@Override
 	public void copyProgress(int id, long processedData) {
 		
@@ -49,6 +73,13 @@ class CliProgressManager extends ProgressManager {
 		updateProgressBar();	
 	}
 	
+	/**
+	 * Updates the premis file creation progress
+	 * 
+	 * @param id The job ID
+	 * @param progress The premis creation progress in percent
+	 * @author Thomas Kleinke
+	 */
 	@Override
 	public void premisProgress(int id, double progress) {
 		
@@ -56,6 +87,13 @@ class CliProgressManager extends ProgressManager {
 		updateProgressBar();
 	}
 	
+	/**
+	 * Updates the BagIt metadata creation progress
+	 * 
+	 * @param id The job ID
+	 * @param progress The BagIt metadata creation progress in percent
+	 * @author Thomas Kleinke
+	 */
 	@Override
 	public void bagitProgress(int id, double progress) {
 		
@@ -63,6 +101,13 @@ class CliProgressManager extends ProgressManager {
 		updateProgressBar();
 	}
 	
+	/**
+	 * Updates the archive file creation progress
+	 * 
+	 * @param id The job ID
+	 * @param archivedData The amount of data already archived
+	 * @author Thomas Kleinke
+	 */
 	@Override
 	public void archiveProgress(int id, long archivedData) {
 		
@@ -70,19 +115,13 @@ class CliProgressManager extends ProgressManager {
 		updateProgressBar();	
 	}
 	
-	public void copyFilesFromListProgress() {
-		
-		copiedFilesFromListCount++;
-		totalProgress = ((double) copiedFilesFromListCount / (double) totalSize) * 100;
-		updateProgressBar();
-	}
-	
-	@Override
-	public void skipJob(int id) {
-		super.skipJob(id);
-		updateProgressBar();
-	}
-	
+		/**
+	 * Updates the temporary file deletion progress
+	 * 
+	 * @param id The job ID
+	 * @param progress The temporary file deletion progress in percent
+	 * @author Thomas Kleinke
+	 */
 	@Override
 	public void deleteTempProgress(int id, double progress) {
 		
@@ -90,6 +129,37 @@ class CliProgressManager extends ProgressManager {
 		updateProgressBar();
 	}
 	
+	/**
+	 * Updates the copy files from list progress (if a file list or SIP list is used to create
+	 * the SIP)
+	 * 
+	 * @author Thomas Kleinke 
+	 */
+	public void copyFilesFromListProgress() {
+		
+		copiedFilesFromListCount++;
+		totalProgress = ((double) copiedFilesFromListCount / (double) totalSize) * 100;
+		updateProgressBar();
+	}
+	
+	/**
+	 * Skips the job (e.g. if the user chose to not overwrite an already existing SIP)
+	 * 
+	 * @param id The ID of the job to skip
+	 * @author Thomas Kleinke
+	 */
+	@Override
+	public void skipJob(int id) {
+		super.skipJob(id);
+		updateProgressBar();
+	}
+	
+	/**
+	 * Creates a success message
+	 * 
+	 * @param skippedFiles Indicates if some files were skipped during the SIP creation process
+	 * @author Thomas Kleinke
+	 */
 	@Override
 	public void createSuccessMessage(boolean skippedFiles) {
 		
@@ -103,6 +173,11 @@ class CliProgressManager extends ProgressManager {
 							   "im Zielordner zu überschreiben.");
 	}
 	
+	/**
+	 * Updates the CLI progress bar according to the current totalProgress value
+	 * 
+	 * @author Thomas Kleinke
+	 */
 	private void updateProgressBar() {
 		
 		System.out.print("\r\r[");
@@ -117,6 +192,12 @@ class CliProgressManager extends ProgressManager {
 		System.out.print("] " + Math.round(totalProgress * 10) / 10.0 + "%");
 	}
 	
+	/**
+	 * Sets the total number of files listed in a file list or SIP list
+	 * 
+	 * @param size The number of files listed in a file list or SIP list
+	 * @author Thomas Kleinke
+	 */
 	public void setTotalSize(long size) {
 		totalSize = size;
 	}

@@ -35,11 +35,20 @@ import de.uzk.hki.da.sb.PublicationRights.Law;
 import de.uzk.hki.da.sb.PublicationRights.TextType;
 import de.uzk.hki.da.sb.SIPFactory.KindOfSIPBuilding;
 
-
+/**
+ * Contains several utility methods and the SIP-Builder version
+ */
 class Utilities {
 	
 	private static final String sipBuilderVersion = "0.6.4";
 	
+	/**
+	 * String to enum translation method
+	 * 
+	 * @param kindofSIPBuildingName The string to translate into an enum
+	 * @return The enum corresponding to the given string
+	 * @author Thomas Kleinke
+	 */
 	public static KindOfSIPBuilding translateKindOfSIPBuilding(String kindofSIPBuildingName) {
 
 		if (kindofSIPBuildingName.equals("Mehrere SIPs aus Unterordnern des Quellverzeichnisses erstellen"))
@@ -50,6 +59,13 @@ class Utilities {
 		return null;
 	}
 	
+	/**
+	 * String to enum translation method
+	 * 
+	 * @param conversionConditionName The string to translate into an enum
+	 * @return The enum corresponding to the given string
+	 * @author Thomas Kleinke
+	 */
 	public static ConversionCondition translateConversionCondition(String conversionConditionName) {
 
 		if (conversionConditionName.equals("Keine"))
@@ -62,6 +78,13 @@ class Utilities {
 		return null;
 	}
 	
+	/**
+	 * Enum to string translation method
+	 * 
+	 * @param conversionConditionEnum The enum to translate into a string
+	 * @return The string corresponding to the given enum
+	 * @author Thomas Kleinke
+	 */
 	public static String translateConversionCondition(ConversionCondition conversionConditionEnum) {
 
 		if (conversionConditionEnum == ConversionCondition.NONE)
@@ -74,6 +97,13 @@ class Utilities {
 		return null;
 	}
 	
+	/**
+	 * String to enum translation method
+	 * 
+	 * @param textType The string to translate into an enum
+	 * @return The enum corresponding to the given string
+	 * @author Thomas Kleinke
+	 */
 	public static TextType translateTextType(String textType) {
 
 		if (textType.equals("Fußzeile"))
@@ -88,6 +118,13 @@ class Utilities {
 		return null;
 	}
 	
+	/**
+	 * Enum to string translation method
+	 * 
+	 * @param textType The enum to translate into a string
+	 * @return The string corresponding to the given enum
+	 * @author Thomas Kleinke
+	 */
 	public static String translateTextType(TextType textType) {
 
 		if (textType == TextType.footer)
@@ -102,6 +139,13 @@ class Utilities {
 		return null;
 	}
 	
+	/**
+	 * Enum to string translation method
+	 * 
+	 * @param textType The enum to translate into a string
+	 * @return The string corresponding to the given enum
+	 * @author Thomas Kleinke
+	 */
 	public static String translateTextTypePosition(TextType textType) {
 
 		if (textType == TextType.footer)
@@ -116,6 +160,13 @@ class Utilities {
 		return null;
 	}	
 	
+	/**
+	 * String to enum translation method
+	 * 
+	 * @param lawName The string to translate into an enum
+	 * @return The enum corresponding to the given string
+	 * @author Thomas Kleinke
+	 */
 	public static Law translateLaw(String lawName) {
 
 		if (lawName.equals("ePflicht"))
@@ -126,6 +177,13 @@ class Utilities {
 		return null;
 	}
 	
+	/**
+	 * Enum to string translation method
+	 * 
+	 * @param lawEnum The enum to translate into a string
+	 * @return The string corresponding to the given enum
+	 * @author Thomas Kleinke
+	 */
 	public static String translateLaw(Law lawEnum) {
 
 		if (lawEnum == Law.EPFLICHT)
@@ -136,10 +194,15 @@ class Utilities {
 		return null;
 	}
 	
-	/** 
-	  * Checks for zero byte files
-	  * @return true if zero byte files exist inside a given folder, false otherwise
-	  */
+	/**
+	 * Checks if zero byte files exist in the given folder 
+	 * 
+	 * @param folder The folder to check
+	 * @param sipName The SIP name
+	 * @param messageWriter The message writer
+	 * @return true if zero byte files exist inside the folder, false otherwise
+	 * @author Thomas Kleinke
+	 */
 	public static boolean checkForZeroByteFiles(File folder, String sipName, MessageWriter messageWriter) {
 		
 		Collection<File> files = FileUtils.listFiles(folder, null, true);
@@ -157,6 +220,14 @@ class Utilities {
 			return false;		
 	}
 	
+	/**
+	 * Deserializes the given file and returns its content as a string
+	 * 
+	 * @param file The file to read
+	 * @return The file content as a string
+	 * @throws Exception
+	 * @author Thomas Kleinke
+	 */
 	public static String readFile(File file) throws Exception {
 
 		Reader reader;
@@ -165,11 +236,11 @@ class Utilities {
 		} catch (FileNotFoundException e) {
 			throw new Exception("Couldn't create reader", e);
 		}
-		String modsText = "";
+		String text = "";
 
 		try {
 			for (int c; (c = reader.read() ) != -1; )
-				modsText += (char) c;
+				text += (char) c;
 
 			reader.close();								
 
@@ -177,9 +248,17 @@ class Utilities {
 			throw new Exception("Couldn't read file " + file.getAbsolutePath(), e);
 		}
 
-		return modsText;		
+		return text;		
 	}
 
+	/**
+	 * Writes the given text string into a file
+	 * 
+	 * @param output File The file to write into
+	 * @param text The text to write into the file
+	 * @throws Exception
+	 * @author Thomas Kleinke
+	 */
 	public static void writeFile(File outputFile, String text) throws Exception {
 
 		Writer writer;

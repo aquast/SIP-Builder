@@ -24,6 +24,9 @@ import java.text.SimpleDateFormat;
 import java.util.Arrays;
 import java.util.List;
 
+/**
+ * Checks if the user input is complete and valid (e.g. if folder pathes exist etc.)
+ */
 class UserInputValidator {
 
 	enum Feedback { VALID,
@@ -44,6 +47,16 @@ class UserInputValidator {
 	
 	private static final char[] illegalFilenameCharacters = { '/', '\\','\n', '\r', '\t', '\0', '\f', '`', '\"', '?', '*', '<', '>', '|', ':' };
 	
+	
+	/**
+	 * Checks if the pathes chosen by the user exist and its contents are compliant with the chosen kind of SIP building
+	 * 
+	 * @param sourcePath The source path
+	 * @param destinationPath The destination path
+	 * @param kindOfSipBuilding The kind of SIP building chosen by the user
+	 * @return The validation result as a Feedback enum
+	 * @author Thomas Kleinke
+	 */
 	public static Feedback checkPaths(String sourcePath, String destinationPath,
 									  SIPFactory.KindOfSIPBuilding kindOfSipBuilding) {
 
@@ -73,6 +86,14 @@ class UserInputValidator {
 		return Feedback.VALID;		
 	}
 	
+	/**
+	 * Checks if a collection with the given name can be created in the folder specified by the given destination path
+	 * 
+	 * @param collectionName The collection name
+	 * @param destinationPath The destination path
+	 * @return The validation result as a Feedback enum
+	 * @author Thomas Kleinke
+	 */
 	public static Feedback checkCollectionName(String collectionName, String destinationPath) {
 		
 		if (collectionName == null || collectionName.equals(""))
@@ -89,6 +110,13 @@ class UserInputValidator {
 		return Feedback.VALID;
 	}
 	
+	/**
+	 * Checks if the SIP name contains invalid characters
+	 * 
+	 * @param sipName The SIP name
+	 * @return The validation result as a Feedback enum
+	 * @author Thomas Kleinke
+	 */
 	public static Feedback checkSipName(String sipName) {
 		
 		for (char character : illegalFilenameCharacters) {
@@ -99,6 +127,13 @@ class UserInputValidator {
 		return Feedback.VALID;
 	}
 
+	/**
+	 * Checks if the given date string is a valid date
+	 * 
+	 * @param date the date as a string
+	 * @return The validation result as a Feedback enum
+	 * @author Thomas Kleinke
+	 */
 	public static Feedback checkDate(String date) {
 
 		if (date == null || date.equals(""))

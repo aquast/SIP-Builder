@@ -35,7 +35,9 @@ import javax.xml.stream.XMLStreamException;
 import javax.xml.stream.XMLStreamReader;
 import javax.xml.stream.XMLStreamWriter;
 
-
+/**
+ * Provides methods for XML file creation (premis.xml and Contract-XML)
+ */
 class XmlWriter {
 
 	private static final String XSI_NS = "http://www.w3.org/2001/XMLSchema-instance";
@@ -45,11 +47,31 @@ class XmlWriter {
 	private XMLStreamWriter writer = null;
 
 	
+	/**
+	 * Creates a new premis.xml file; the rights settings are taken from the SIPFactory
+	 * 
+	 * @param sip The active SIPFactory
+	 * @param f The premis file to create
+	 * @param packageName The package name
+	 * @throws Exception
+	 * @author Thomas Kleinke
+	 */
 	public void createPremisFile(SIPFactory sip, File f, String packageName) throws Exception {
 		
 		createPremisFile(sip, f, null, packageName);
 	}
 	
+	/**
+	 * Creates a new premis.xml; the rights settings are taken from the SIPFactory or optionally from an existing premis.xml file
+	 * 
+	 * @param sip The active SIPFactory
+	 * @param f The premis file to create
+	 * @param rightsSourcePremisFile The premis file from which the rights settings are taken (null if the rights settings are
+	 * taken from the SIPFactory)
+	 * @param packageName The package name
+	 * @throws Exception
+	 * @author Thomas Kleinke
+	 */
 	public void createPremisFile(SIPFactory sip, File f, File rightsSourcePremisFile, String packageName) throws Exception {
 		
 		XMLOutputFactory outputFactory = XMLOutputFactory.newInstance();
@@ -92,7 +114,14 @@ class XmlWriter {
 
 	}
 	
-
+	/**
+	 * Writes the user's contract rights settings to an XML file
+	 * 
+	 * @param contractRights The contracts rights to serialize
+	 * @param f The contracts rights file
+	 * @throws Exception
+	 * @author Thomas Kleinke
+	 */
 	public void createContractRightsFile(ContractRights contractRights, File f) throws Exception {
 
 		XMLOutputFactory outputFactory = XMLOutputFactory.newInstance();
@@ -131,6 +160,13 @@ class XmlWriter {
 	
 	}
 	
+	/**
+	 * Writes the publication rights to a contract rights XML file
+	 * 
+	 * @param pubRights The publication rights to serialize
+	 * @throws Exception
+	 * @author Thomas Kleinke
+	 */
 	private void generatePublicationRightsElement(PublicationRights pubRights) throws Exception {
 		
 		createTextElement("allowed", String.valueOf(pubRights.getAllowPublication()), 2);
@@ -171,7 +207,13 @@ class XmlWriter {
 			createCloseElement(2);
 	}
 	
-	
+	/**
+	 * Creates a premis object element for the package
+	 * 
+	 * @param packageName The package name
+	 * @throws XMLStreamException
+	 * @author Thomas Kleinke
+	 */
 	private void generateObjectElement(String packageName) throws XMLStreamException {
 		
 		createOpenElement("object", 1);
@@ -183,7 +225,13 @@ class XmlWriter {
 		createCloseElement(1);		
 	}
 	
-	
+	/**
+	 * Creates a premis event element for the SIP creation process
+	 * 
+	 * @param packageName The package name
+	 * @throws XMLStreamException
+	 * @author Thomas Kleinke
+	 */
 	private void generateEventElement(String packageName) throws XMLStreamException {
 		
 		Date creationDate = new Date();
@@ -206,6 +254,12 @@ class XmlWriter {
 		createCloseElement(1);
 	}
 	
+	/**
+	 * Creates an agent element for the SIP-Builder
+	 * 
+	 * @throws XMLStreamException
+	 * @author Thomas Kleinke
+	 */
 	private void generateAgentElement() throws XMLStreamException {
 		
 		createOpenElement("agent", 1);
@@ -217,6 +271,13 @@ class XmlWriter {
 		createCloseElement(1);		
 	}
 
+	/**
+	 * Creates a rights element representing the user's contract rights settings
+	 * 
+	 * @param contractRights The contract rights settings to serialize
+	 * @throws XMLStreamException
+	 * @author Thomas Kleinke
+	 */
 	private void generateRightsElement(ContractRights contractRights) throws XMLStreamException {
 		
 		PublicationRights publicRights = contractRights.getPublicRights();
@@ -480,6 +541,14 @@ class XmlWriter {
 		createCloseElement(1);
 	}
 	
+	/**
+	 * 
+	 * Copies the contract rights settings from an existing premis file to the newly created premis file
+	 * 
+	 * @param rightsSourcePremisFile - The premis file from which the rights settings are taken
+	 * @throws XMLStreamException
+	 * @author Thomas Kleinke
+	 */
 	private void copyRightsElementFromPremisFile(File rightsSourcePremisFile) throws XMLStreamException {
 
 		FileInputStream inputStream = null;

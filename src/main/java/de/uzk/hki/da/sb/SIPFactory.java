@@ -34,6 +34,9 @@ import javax.swing.JOptionPane;
 
 import org.apache.commons.io.FileUtils;
 
+/**
+ * The central SIP production class
+ */
 public class SIPFactory {
 
 	private String sourcePath = null;
@@ -53,7 +56,7 @@ public class SIPFactory {
 	private boolean compress;
 
 	private List<String> forbiddenFileExtensions = null;
-
+	
 	private File listCreationTempFolder = null;
 
 	private MessageWriter messageWriter;
@@ -108,6 +111,11 @@ public class SIPFactory {
 		}	
 	};
 
+	/**
+	 * Creates and starts a new SIP building process
+	 * 
+	 * @author Thomas Kleinke
+	 */
 	public void startSIPBuilding() {
 
 		sipBuildingProcess = new SipBuildingProcess();
@@ -115,6 +123,12 @@ public class SIPFactory {
 		sipBuildingProcess.start();
 	}
 
+	/**
+	 * Creates a list of source folders
+	 * 
+	 * @param folderPath The main source folder path
+	 * @author Thomas Kleinke
+	 */
 	private List<File> createFolderList(String folderPath) {
 
 		List<File> folderList = new ArrayList<File>();
@@ -140,6 +154,13 @@ public class SIPFactory {
 		return folderList;		
 	}
 
+	/**
+	 * Starts the progress manager and creates a progress manager job for each SIP to build
+	 * 
+	 * @param folderList The source folder list
+	 * @return The method result as a Feedback enum
+	 * @author Thomas Kleinke
+	 */
 	private Feedback initializeProgressManager(List<File> folderList) {
 
 		progressManager.reset();
@@ -164,6 +185,14 @@ public class SIPFactory {
 		return Feedback.SUCCESS;
 	}
 
+	/**
+	 * Creates a SIP out of the given source folder 
+	 * 
+	 * @param jobId The job ID
+	 * @param sourceFolder The source folder
+	 * @return The method result as a Feedback enum
+	 * @author Thomas Kleinke
+	 */
 	private Feedback buildSIP(int jobId, File sourceFolder) {
 
 		progressManager.startJob(jobId);
@@ -230,6 +259,15 @@ public class SIPFactory {
 		return Feedback.SUCCESS;
 	}
 
+	/**
+	 * Copies the contents of the given source folder to a newly created temp folder
+	 * 
+	 * @param jobId The job ID
+	 * @param sourceFolder The source folder
+	 * @param tempFolder The temp folder
+	 * @return The method result as a Feedback enum
+	 * @author Thomas Kleinke
+	 */
 	private Feedback copyFolder(int jobId, File sourceFolder, File tempFolder) {
 
 		progressManager.copyProgress(jobId, 0);
@@ -253,6 +291,15 @@ public class SIPFactory {
 		return Feedback.SUCCESS;
 	}
 
+	/**
+	 * Creates the premis.xml file
+	 * 
+	 * @param jobId The job ID
+	 * @param folder The temp folder
+	 * @param packageName The package name
+	 * @return The method result as a Feedback enum
+	 * @author Thomas Kleinke
+	 */
 	private Feedback createPremisFile(int jobId, File folder, String packageName) {
 
 		progressManager.premisProgress(jobId, 0.0);
@@ -278,6 +325,14 @@ public class SIPFactory {
 		return Feedback.SUCCESS;
 	}
 
+	/**
+	 * Creates BagIt checksums and metadata for the files in the given folder
+	 * 
+	 * @param jobId The job ID
+	 * @param folder The temp folder
+	 * @return The method result as a Feedback enum
+	 * @author Thomas Kleinke
+	 */
 	private Feedback createBag(int jobId, File folder) {
 
 		progressManager.bagitProgress(jobId, 0.0);
@@ -308,6 +363,16 @@ public class SIPFactory {
 		}
 	}
 
+	/**
+	 * Creates a tar oder tgz archive file out of the given folder.
+	 * The value of the field 'compress' determines if a tar or tgz file is created. 
+	 * 
+	 * @param jobId The job ID
+	 * @param folder The folder to archive
+	 * @param archiveFile The target archive file
+	 * @return The method result as a Feedback enum
+	 * @author Thomas Kleinke
+	 */
 	private Feedback buildArchive(int jobId, File folder, File archiveFile) {
 
 		progressManager.setJobFolderSize(jobId, FileUtils.sizeOfDirectory(folder));
@@ -330,6 +395,14 @@ public class SIPFactory {
 		return Feedback.SUCCESS;
 	}
 
+	/**
+	 * Deletes the temp folder and its contents
+	 * 
+	 * @param jobId The job ID
+	 * @param folder The temp folder to delete
+	 * @return The method result as a Feedback enum
+	 * @author Thomas Kleinke
+	 */
 	private Feedback deleteTempFolder(int jobId, File folder) {
 
 		progressManager.deleteTempProgress(jobId, 0.0);
@@ -346,6 +419,14 @@ public class SIPFactory {
 		return Feedback.SUCCESS;
 	}
 
+	/**
+	 * Moves the given archived SIP file to the collection folder
+	 * 
+	 * @param jobId The job ID
+	 * @param archiveFile The SIP file
+	 * @return The method result as a Feedback enum
+	 * @author Thomas Kleinke
+	 */
 	private Feedback moveSipToCollectionFolder(int jobId, File archiveFile) {
 
 		try {
@@ -360,9 +441,13 @@ public class SIPFactory {
 	}
 
 	/**
+	 * Checks if a SIP already exists inside the given folder. If an existing SIP is found, the user may decide to overwrite it
+	 * or abort the process.
 	 * 
-	 * @return true if no existing sip for the given folderName is found or the user decides to overwrite the existing sip
-	 * @return false if a sip for the given folderName already exists and the user decides to abort the sip creation process
+	 * @param folderName The name of the folder to check
+	 * @return true if no existing SIP for the given folderName is found or the user decides to overwrite the existing SIP
+	 * @return false if a SIP for the given folderName already exists and the user decides to abort the SIP creation process
+	 * @author Thomas Kleinke
 	 */
 	private boolean checkForExistingSip(String folderName){
 
@@ -431,18 +516,35 @@ public class SIPFactory {
 			FileUtils.deleteQuietly(archiveFile);				
 	}
 
+	/**
+	 * This method is called by the SIP building process.
+	 * It deletes partially created collections and aborts the progress manager.
+	 *  
+	 * @author Thomas Kleinke
+	 */
 	private void abortSipBuilding() {
+
 		if (listCreationTempFolder != null && listCreationTempFolder.exists())
 			FileUtils.deleteQuietly(listCreationTempFolder);
-
+		
 		FileUtils.deleteQuietly(collectionFolder);
 		progressManager.abort();
 	}
 
+	/**
+	 * Aborts the SIP building process
+	 * 
+	 * @author Thomas Kleinke
+	 */
 	public void abort() {
 		sipBuildingProcess.abort();
 	}
 
+	/**
+	 *  
+	 * @return true if the SIP building process is working, otherwise false
+	 * @author Thomas Kleinke
+	 */
 	public boolean isWorking() {
 
 		if (sipBuildingProcess == null ||
@@ -535,7 +637,7 @@ public class SIPFactory {
 	public void setForbiddenFileExtensions(List<String> forbiddenFileExtensions) {
 		this.forbiddenFileExtensions = forbiddenFileExtensions;
 	}
-
+	
 	public File getListCreationTempFolder() {
 		return listCreationTempFolder;
 	}
@@ -565,10 +667,18 @@ public class SIPFactory {
 	}
 
 
+	/**
+	 * The SIP building procedure is run in its own thread to prevent GUI freezing 
+	 */
 	public class SipBuildingProcess extends Thread {
 
 		private boolean abortRequested = false;
 
+		/**
+		 * Creates one ore more SIPs as specified by the user
+		 * 
+		 * @author Thomas Kleinke
+		 */
 		public void run() {
 
 			alwaysOverwrite = false;
@@ -580,7 +690,7 @@ public class SIPFactory {
 
 				if (collectionFolder.exists()) {
 					MessageWriter.UserInput answer =
-							messageWriter.showYesNoDialog("Eine Lieferung mit dem Namen \"" + collectionName + "\"" + 
+							messageWriter.showCollectionOverwriteDialog("Eine Lieferung mit dem Namen \"" + collectionName + "\"" + 
 									"existiert bereits.\n" +
 									"Möchten Sie die bestehende Lieferung überschreiben?");
 
@@ -651,7 +761,7 @@ public class SIPFactory {
 
 				id++;
 			}
-
+			
 			if (listCreationTempFolder != null && listCreationTempFolder.exists())
 				FileUtils.deleteQuietly(listCreationTempFolder);
 

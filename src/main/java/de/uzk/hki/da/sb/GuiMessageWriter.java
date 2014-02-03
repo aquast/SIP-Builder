@@ -26,16 +26,32 @@ import java.util.Collections;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
+/**
+ * A specialized message writer responsible for displaying info messages and dialogs in GUI mode
+ */
 class GuiMessageWriter extends MessageWriter {
 
 	private Component gui;
 	private Image iconImage;
 
+	/**
+	 * Shows a message box
+	 * 
+	 * @param message The message to display
+	 * @author Thomas Kleinke
+	 */
 	@Override
 	public void showMessage(String message) {
 		showMessage(message, JOptionPane.PLAIN_MESSAGE);
 	}
 	
+	/**
+	 * Shows a message box of the given message type
+	 * 
+	 * @param message The message to display
+	 * @param type The message type (one of the message types in JOptionPane)
+	 * @author Thomas Kleinke
+	 */
 	@Override
 	public void showMessage(String message, int type) {
 
@@ -45,6 +61,13 @@ class GuiMessageWriter extends MessageWriter {
 			JOptionPane.showMessageDialog(gui, message, "DA NRW SIP-Builder", type);
 	}
 
+	/**
+	 * Lets the user decide if a certain file will be overwritten or not
+	 * 
+	 * @param message The message to display
+	 * @return The user input as a UserInput enum
+	 * @author Thomas Kleinke
+	 */
 	@Override
 	public UserInput showOverwriteDialog(String message) {
 
@@ -63,8 +86,15 @@ class GuiMessageWriter extends MessageWriter {
 		}
 	}
 	
+	/**
+	 *  Lets the user decide if an already existing collection will be overwritten or not
+	 * 
+	 * @param message The message to display
+	 * @return The user input as a UserInput enum
+	 * @author Thomas Kleinke
+	 */
 	@Override
-	public UserInput showYesNoDialog(String message) {
+	public UserInput showCollectionOverwriteDialog(String message) {
 
 		String[] options = new String[] {"Ja", "Nein" };
 		int answer = JOptionPane.showOptionDialog(gui, message, "DA NRW SIP-Builder", JOptionPane.YES_NO_OPTION, JOptionPane.INFORMATION_MESSAGE, new ImageIcon(iconImage), options, null);
@@ -79,6 +109,11 @@ class GuiMessageWriter extends MessageWriter {
 		}
 	}
 	
+	/**
+	 * Displays a message that informs the user about which zero byte files were found
+	 * 
+	 * @author Thomas Kleinke
+	 */
 	public void showZeroByteFileMessage() {
 		
 		Collections.sort(zeroByteFiles);

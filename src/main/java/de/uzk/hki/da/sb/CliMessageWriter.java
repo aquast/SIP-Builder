@@ -19,28 +19,60 @@
 
 package de.uzk.hki.da.sb;
 
+/**
+ * A specialized message writer responsible for displaying info messages in CLI mode
+ */
 class CliMessageWriter extends MessageWriter{
 
 	UserInput standardAnswer = UserInput.NO;
 	
+	/**
+	 * Displays a message
+	 * 
+	 * @param message The message to display
+	 * @author Thomas Kleinke
+	 */
 	@Override
 	public void showMessage(String message) {
 		showMessage(message, 0);
 	}
 	
+	/**
+	 * Displays a message. The message type is ignored in CLI mode.
+	 * 
+	 * @param message The message to display
+	 * @param type Not necessary in CLI mode
+	 * @author Thomas Kleinke
+	 */
 	@Override
 	public void showMessage(String message, int type) {
 		System.out.println(message);		
 	}
 
+	/**
+	 * The user isn't asked each time an already existing SIP is found in CLI mode.
+	 * Instead, a previously set standard answer is returned.
+	 * 
+	 * @param message Not necessary in CLI mode
+	 * @return The previously set standard answer
+	 * @author Thomas Kleinke
+	 */
 	@Override
 	public UserInput showOverwriteDialog(String message) {
 		
 		return standardAnswer;
 	}
 	
+	/**
+	 * The user isn't asked each time an already existing collection is found in CLI mode.
+	 * Instead, a previously set standard answer is returned.
+	 * 
+	 * @param message Not necessary in CLI mode
+	 * @return The previously set standard answer
+	 * @author Thomas Kleinke
+	 */
 	@Override
-	public UserInput showYesNoDialog(String message) {
+	public UserInput showCollectionOverwriteDialog(String message) {
 		
 		if (standardAnswer == UserInput.NO) {
 			System.out.println("\nIm Zielverzeichnis existiert bereits eine Lieferung des gewählten Namens."); 
@@ -50,6 +82,11 @@ class CliMessageWriter extends MessageWriter{
 		return standardAnswer;
 	}
 	
+	/**
+	 * Displays a message that informs the user about which zero byte files were found
+	 * 
+	 * @author Thomas Kleinke
+	 */
 	public void showZeroByteFileMessage() {
 		
 		String message = "";
@@ -69,6 +106,12 @@ class CliMessageWriter extends MessageWriter{
 		System.out.println(message);
 	}
 
+	/**
+	 * Sets the standard answer that is returned in showOverwriteDialog and showCollectionOverwriteDialog
+	 * 
+	 * @param standardAnswer
+	 * @author Thomas Kleinke
+	 */
 	public void setStandardAnswer(UserInput standardAnswer) {
 		this.standardAnswer = standardAnswer;
 	}

@@ -22,6 +22,9 @@ package de.uzk.hki.da.sb;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * The ProgressManager is responsible for updating the progress bars in both CLI and GUI modes 
+ */
 abstract class ProgressManager {
 
 	Map<Integer, SIPCreationJob> jobMap = new HashMap<Integer, SIPCreationJob>();
@@ -34,6 +37,14 @@ abstract class ProgressManager {
 	final double archivePercentage = 0.5;
 	final double deleteTempPercentage = 0.05;
 	
+	/**
+	 * Creates a new job with the given job ID, package name and folder size and adds it to the job map
+	 * 
+	 * @param id The job ID
+	 * @param packageName The package name
+	 * @param folderSize The size of the package folder
+	 * @author Thomas Kleinke
+	 */
 	public void addJob(int id, String packageName, long folderSize) {
 		
 		SIPCreationJob job = new SIPCreationJob(id, packageName, folderSize);
@@ -45,13 +56,27 @@ abstract class ProgressManager {
 		totalSize += folderSize;
 	}
 	
+	/**
+	 * Clears the job map and sets the total progress to 0
+	 * 
+	 * @author Thomas Kleinke
+	 */
 	public void reset() {
 		jobMap.clear();
 		totalProgress = 0.0;
 	}
 	
+	/**
+	 * Creates an abort message
+	 */
 	abstract public void abort();
 	
+	/**
+	 * Determines the share each job has in the total progress
+	 * 
+	 * @param createCollection Specifies if a collection will be created or not
+	 * @author Thomas Kleinke
+	 */
 	public void calculateProgressParts(boolean createCollection) {
 
 		for (SIPCreationJob job : jobMap.values()) {
@@ -73,10 +98,26 @@ abstract class ProgressManager {
 		}
 	}
 	
+	/**
+	 * Creates a start message
+	 */
 	abstract public void createStartMessage();
 	
+	/**
+	 * Informs the progress manager that a certain job is active now
+	 * 
+	 * @param id The ID of the job to start
+	 * @author Thomas Kleinke
+	 */
 	abstract public void startJob(int id);
 	
+	/**
+	 * Updates the copy progress
+	 * 
+	 * @param id The job ID
+	 * @param processedData The amount of data already copied
+	 * @author Thomas Kleinke
+	 */
 	public void copyProgress(int id, long processedData) {
 		
 		SIPCreationJob job = jobMap.get(id);
@@ -90,6 +131,13 @@ abstract class ProgressManager {
 		totalProgress = job.getProgress();
 	}
 	
+	/**
+	 * Updates the premis file creation progress
+	 * 
+	 * @param id The job ID
+	 * @param progress The premis creation progress in percent
+	 * @author Thomas Kleinke
+	 */
 	public void premisProgress(int id, double progress) {
 		
 		SIPCreationJob job = jobMap.get(id);
@@ -99,6 +147,13 @@ abstract class ProgressManager {
 		totalProgress = job.getProgress();
 	}
 	
+	/**
+	 * Updates the BagIt metadata creation progress
+	 * 
+	 * @param id The job ID
+	 * @param progress The BagIt metadata creation progress in percent
+	 * @author Thomas Kleinke
+	 */
 	public void bagitProgress(int id, double progress) {
 			
 		SIPCreationJob job = jobMap.get(id);
@@ -111,6 +166,13 @@ abstract class ProgressManager {
 		totalProgress = job.getProgress();
 	}
 	
+	/**
+	 * Updates the archive file creation progress
+	 * 
+	 * @param id The job ID
+	 * @param archivedData The amount of data already archived
+	 * @author Thomas Kleinke
+	 */
 	public void archiveProgress(int id, long archivedData) {
 				
 		SIPCreationJob job = jobMap.get(id);
@@ -124,6 +186,13 @@ abstract class ProgressManager {
 		totalProgress = job.getProgress();
 	}
 	
+	/**
+	 * Updates the temporary file deletion progress
+	 * 
+	 * @param id The job ID
+	 * @param progress The temporary file deletion progress in percent
+	 * @author Thomas Kleinke
+	 */
 	public void deleteTempProgress(int id, double progress) {
 		
 		SIPCreationJob job = jobMap.get(id);
@@ -133,6 +202,12 @@ abstract class ProgressManager {
 		totalProgress = job.getProgress();
 	}
 	
+	/**
+	 * Skips the job (e.g. if the user chose to not overwrite an already existing SIP)
+	 * 
+	 * @param id The ID of the job to skip
+	 * @author Thomas Kleinke
+	 */
 	public void skipJob(int id) {
 		
 		SIPCreationJob job = jobMap.get(id);
@@ -140,15 +215,31 @@ abstract class ProgressManager {
 		totalProgress = job.initialTotalProgress + job.progressPart; 
 	}
 	
+	/**
+	 * Creates a success message
+	 * 
+	 * @param skippedFiles Indicates if some files were skipped during the SIP creation process
+	 * @author Thomas Kleinke
+	 */
 	public void createSuccessMessage(boolean skippedFiles) {
 		totalProgress = 100.0;
 	}
 	
+	/**
+	 * Sets the folder size for the given job to the given value
+	 * 
+	 * @param id The job ID
+	 * @param folderSize The folder size to set
+	 * @author Thomas Kleinke
+	 */
 	public void setJobFolderSize(int id, long folderSize) {
 		
 		jobMap.get(id).folderSize = folderSize;		
 	}
 	
+	/**
+	 * Saves progress and folder size information for a SIP building process 
+	 */
 	class SIPCreationJob {
 		
 		int id;
@@ -167,6 +258,12 @@ abstract class ProgressManager {
 			this.folderSize = folderSize;
 		}
 		
+		/**
+		 * 
+		 * @return The total progress including the progress of all previously created SIPs
+		 * and the progress of the SIP connected to this job
+		 * @author Thomas Kleinke
+		 */
 		public double getProgress() {
 			
 			return initialTotalProgress +

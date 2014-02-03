@@ -29,6 +29,9 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
+/**
+ * Saves the publication rights for one audience
+ */
 class PublicationRights {
 
 	// General rights
@@ -77,6 +80,13 @@ class PublicationRights {
 		return startDate;
 	}
 
+	/**
+	 * Takes a start date as a string and saves it as a date object
+	 * 
+	 * @param startDate The start date as a text string
+	 * @return true if the date could be successfully parsed, false otherwise
+	 * @author Thomas Kleinke
+	 */
 	public boolean setStartDate(String startDate) {
 		
 		Date date = checkDate(startDate);
@@ -226,6 +236,16 @@ class PublicationRights {
 		this.imageRestrictionText = imageRestrictionText;
 	}
 	
+	/**
+	 * Turns the pages settings chosen by the user into a list of pages (as a single string)
+	 * 
+	 * Example:
+	 * pages settings: "1, 6-10, 200"
+	 * result: "1 6 7 8 9 10 200"
+	 * 
+	 * @return List of pages as a single string
+	 * @author Thomas Kleinke
+	 */
 	public String parsePages() {
 		
 		if (pages.contains("$"))
@@ -329,6 +349,15 @@ class PublicationRights {
 		return builder.toString();
 	}
 	
+	/**
+	 * Adds the pages between startPage and endPage to the given list of pages
+	 * 
+	 * @param startPage The first page to add
+	 * @param endPage The last page to add
+	 * @param pagesList The page list
+	 * @return true if the pages could be added, otherwise false
+	 * @author Thomas Kleinke
+	 */
 	private boolean addPagesToList(int startPage, int endPage, Set<Integer> pagesList) {
 		
 		if (startPage > endPage || (endPage - startPage) > 1000000)
@@ -342,6 +371,13 @@ class PublicationRights {
 		return true;
 	}
 	
+	/**
+	 * Checks if the given date string is a valid date
+	 * 
+	 * @param dateString The date as a text string
+	 * @return The date as a date object if the date string is a valid date, otherwise null
+	 * @author Thomas Kleinke
+	 */
 	private Date checkDate(String dateString) {
 		
 		SimpleDateFormat dateFormat1 = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS");
