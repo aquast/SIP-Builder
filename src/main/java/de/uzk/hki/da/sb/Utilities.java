@@ -37,6 +37,8 @@ import de.uzk.hki.da.sb.SIPFactory.KindOfSIPBuilding;
 
 /**
  * Contains several utility methods and the SIP-Builder version
+ * 
+ * @author Thomas Kleinke
  */
 class Utilities {
 	
@@ -47,7 +49,6 @@ class Utilities {
 	 * 
 	 * @param kindofSIPBuildingName The string to translate into an enum
 	 * @return The enum corresponding to the given string
-	 * @author Thomas Kleinke
 	 */
 	public static KindOfSIPBuilding translateKindOfSIPBuilding(String kindofSIPBuildingName) {
 
@@ -64,7 +65,6 @@ class Utilities {
 	 * 
 	 * @param conversionConditionName The string to translate into an enum
 	 * @return The enum corresponding to the given string
-	 * @author Thomas Kleinke
 	 */
 	public static ConversionCondition translateConversionCondition(String conversionConditionName) {
 
@@ -83,7 +83,6 @@ class Utilities {
 	 * 
 	 * @param conversionConditionEnum The enum to translate into a string
 	 * @return The string corresponding to the given enum
-	 * @author Thomas Kleinke
 	 */
 	public static String translateConversionCondition(ConversionCondition conversionConditionEnum) {
 
@@ -102,7 +101,6 @@ class Utilities {
 	 * 
 	 * @param textType The string to translate into an enum
 	 * @return The enum corresponding to the given string
-	 * @author Thomas Kleinke
 	 */
 	public static TextType translateTextType(String textType) {
 
@@ -123,7 +121,6 @@ class Utilities {
 	 * 
 	 * @param textType The enum to translate into a string
 	 * @return The string corresponding to the given enum
-	 * @author Thomas Kleinke
 	 */
 	public static String translateTextType(TextType textType) {
 
@@ -144,7 +141,6 @@ class Utilities {
 	 * 
 	 * @param textType The enum to translate into a string
 	 * @return The string corresponding to the given enum
-	 * @author Thomas Kleinke
 	 */
 	public static String translateTextTypePosition(TextType textType) {
 
@@ -165,7 +161,6 @@ class Utilities {
 	 * 
 	 * @param lawName The string to translate into an enum
 	 * @return The enum corresponding to the given string
-	 * @author Thomas Kleinke
 	 */
 	public static Law translateLaw(String lawName) {
 
@@ -182,7 +177,6 @@ class Utilities {
 	 * 
 	 * @param lawEnum The enum to translate into a string
 	 * @return The string corresponding to the given enum
-	 * @author Thomas Kleinke
 	 */
 	public static String translateLaw(Law lawEnum) {
 
@@ -201,7 +195,6 @@ class Utilities {
 	 * @param sipName The SIP name
 	 * @param messageWriter The message writer
 	 * @return true if zero byte files exist inside the folder, false otherwise
-	 * @author Thomas Kleinke
 	 */
 	public static boolean checkForZeroByteFiles(File folder, String sipName, MessageWriter messageWriter) {
 		
@@ -226,7 +219,6 @@ class Utilities {
 	 * @param file The file to read
 	 * @return The file content as a string
 	 * @throws Exception
-	 * @author Thomas Kleinke
 	 */
 	public static String readFile(File file) throws Exception {
 
@@ -257,7 +249,6 @@ class Utilities {
 	 * @param output File The file to write into
 	 * @param text The text to write into the file
 	 * @throws Exception
-	 * @author Thomas Kleinke
 	 */
 	public static void writeFile(File outputFile, String text) throws Exception {
 

@@ -36,6 +36,11 @@ import org.xml.sax.SAXException;
 import org.xml.sax.SAXParseException;
 import org.xml.sax.XMLReader;
 
+/**
+ * Contains the selectable values for certain restriction settings shown in the drop down boxes in GUI mode
+ * 
+ * @author Thomas Kleinke
+ */
 class ContractSettings {
 
 	private String[] duration = new String[4];
@@ -56,6 +61,16 @@ class ContractSettings {
 			setStandardSettings();
 	}
 	
+	/**
+	 * Loads the settings from the default settings XML file
+	 * 
+	 * @param settingsFile The XML file
+	 * @throws IOException
+	 * @throws ValidityException
+	 * @throws ParsingException
+	 * @throws NullPointerException
+	 * @throws SAXException
+	 */
 	private void loadSettingsFile(File settingsFile) throws IOException, ValidityException,
 		ParsingException, NullPointerException, SAXException {
 		
@@ -134,6 +149,9 @@ class ContractSettings {
 		heightVideo[2] = heightVideoEl.getFirstChildElement("thirdOption").getValue();
 	}
 	
+	/**
+	 * Sets some default values (just needed if the settings.xml is not found)
+	 */
 	private void setStandardSettings() {
 	
 		duration[0] = "5";
@@ -169,10 +187,22 @@ class ContractSettings {
 		heightVideo[2] = "1080";
 	}
 
+	/**
+	 * Returns the duration value for a certain index
+	 * 
+	 * @param index The drop down menu index
+	 * @return The duration value as a text string
+	 */
 	public String getDuration(int index) {
 		return duration[index];
 	}
 
+	/**
+	 * Returns the image width value for a certain index
+	 * 
+	 * @param index The drop down menu index
+	 * @return The image width value as a text string
+	 */
 	public String getWidthImage(int index) {
 		
 		if (index <= 2)		
@@ -181,6 +211,12 @@ class ContractSettings {
 			return percentImage[index - 3];
 	}
 
+	/**
+	 * Returns the image height value for a certain index
+	 * 
+	 * @param index The drop down menu index
+	 * @return The image height value as a text string
+	 */
 	public String getHeightImage(int index) {
 		
 		if (index <= 2)		
@@ -189,22 +225,52 @@ class ContractSettings {
 			return percentImage[index - 3];		
 	}
 
+	/**
+	 * Returns the image percent value for a certain index
+	 * 
+	 * @param index The drop down menu index
+	 * @return The image percent value as a text string
+	 */
 	public String getPercentImage(int index) {
 		return percentImage[index];
 	}
 	
+	/**
+	 * Returns the watermark opacity value for a certain index
+	 * 
+	 * @param index The drop down menu index
+	 * @return The watermark opacity value as a text string
+	 */
 	public String getOpacityImage(int index) {
 		return opacityImage[index];
 	}
 	
+	/**
+	 * Returns the watermark text size value for a certain index
+	 * 
+	 * @param index The drop down menu index
+	 * @return The watermark text size value as a text string
+	 */
 	public String getTextSizeImage(int index) {
 		return textSizeImage[index];
 	}
 
+	/**
+	 * Returns the video height value for a certain index
+	 * 
+	 * @param index The drop down menu index
+	 * @return The video height value as a text string
+	 */
 	public String getHeightVideo(int index) {
 		return heightVideo[index];
 	}
 	
+	/**
+	 * Returns the drop down menu index for a certain duration value
+	 * 
+	 * @param value The duration value as a text string
+	 * @return The drop down menu index corresponding to the given text string
+	 */
 	public int getDurationIndex(String value) {
 		if (value == null)
 			return -1;
@@ -218,6 +284,12 @@ class ContractSettings {
 		return -1;		
 	}
 	
+	/**
+	 * Returns the drop down menu index for a certain image width value
+	 * 
+	 * @param value The image width value as a text string
+	 * @return The drop down menu index corresponding to the given text string
+	 */
 	public int getWidthImageIndex(String value) {
 		if (value == null)
 			return -1;
@@ -237,6 +309,12 @@ class ContractSettings {
 		return -1;		
 	}
 	
+	/**
+	 * Returns the drop down menu index for a certain image height value
+	 * 
+	 * @param value The image height value as a text string
+	 * @return The drop down menu index corresponding to the given text string
+	 */
 	public int getHeightImageIndex(String value) {
 		if (value == null)
 			return -1;
@@ -256,6 +334,12 @@ class ContractSettings {
 		return -1;		
 	}
 	
+	/**
+	 * Returns the drop down menu index for a certain watermark opacity value
+	 * 
+	 * @param value The watermark opacity value as a text string
+	 * @return The drop down menu index corresponding to the given text string
+	 */
 	public int getOpacityImageIndex(String value) {
 		if (value == null)
 			return -1;
@@ -269,6 +353,12 @@ class ContractSettings {
 		return -1;		
 	}
 	
+	/**
+	 * Returns the drop down menu index for a certain watermark text string value
+	 * 
+	 * @param value The watermark text string value as a text string
+	 * @return The drop down menu index corresponding to the given text string
+	 */
 	public int getTextSizeImageIndex(String value) {
 		if (value == null)
 			return -1;
@@ -282,6 +372,12 @@ class ContractSettings {
 		return -1;		
 	}
 	
+	/**
+	 * Returns the drop down menu index for a certain video height value
+	 * 
+	 * @param value The video height value as a text string
+	 * @return The drop down menu index corresponding to the given text string
+	 */
 	public int getHeightVideoIndex(String value) {
 		if (value == null)
 			return -1;

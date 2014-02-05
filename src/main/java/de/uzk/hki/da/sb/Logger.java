@@ -29,6 +29,8 @@ import java.util.Date;
 
 /**
  * Can be used to write log messages into the SIP-Builder's log file
+ * 
+ * @author Thomas Kleinke
  */
 class Logger {
 
@@ -44,7 +46,6 @@ class Logger {
 	 * Writes a message into the log file
 	 * 
 	 * @param message The message to write
-	 * @author Thomas Kleinke
 	 */
 	public void log(String message) {
 		
@@ -64,7 +65,6 @@ class Logger {
 	 * 
 	 * @param message The message to write
 	 * @param exception The exception
-	 * @author Thomas Kleinke
 	 */
 	public void log(String message, Exception exception) {
 		

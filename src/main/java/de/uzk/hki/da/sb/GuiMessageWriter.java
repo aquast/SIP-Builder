@@ -28,6 +28,8 @@ import javax.swing.JOptionPane;
 
 /**
  * A specialized message writer responsible for displaying info messages and dialogs in GUI mode
+ * 
+ * @author Thomas Kleinke
  */
 class GuiMessageWriter extends MessageWriter {
 
@@ -38,7 +40,6 @@ class GuiMessageWriter extends MessageWriter {
 	 * Shows a message box
 	 * 
 	 * @param message The message to display
-	 * @author Thomas Kleinke
 	 */
 	@Override
 	public void showMessage(String message) {
@@ -50,7 +51,6 @@ class GuiMessageWriter extends MessageWriter {
 	 * 
 	 * @param message The message to display
 	 * @param type The message type (one of the message types in JOptionPane)
-	 * @author Thomas Kleinke
 	 */
 	@Override
 	public void showMessage(String message, int type) {
@@ -66,7 +66,6 @@ class GuiMessageWriter extends MessageWriter {
 	 * 
 	 * @param message The message to display
 	 * @return The user input as a UserInput enum
-	 * @author Thomas Kleinke
 	 */
 	@Override
 	public UserInput showOverwriteDialog(String message) {
@@ -91,7 +90,6 @@ class GuiMessageWriter extends MessageWriter {
 	 * 
 	 * @param message The message to display
 	 * @return The user input as a UserInput enum
-	 * @author Thomas Kleinke
 	 */
 	@Override
 	public UserInput showCollectionOverwriteDialog(String message) {
@@ -111,8 +109,6 @@ class GuiMessageWriter extends MessageWriter {
 	
 	/**
 	 * Displays a message that informs the user about which zero byte files were found
-	 * 
-	 * @author Thomas Kleinke
 	 */
 	public void showZeroByteFileMessage() {
 		

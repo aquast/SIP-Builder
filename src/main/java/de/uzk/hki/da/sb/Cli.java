@@ -43,6 +43,11 @@ import org.xml.sax.XMLReader;
 
 import de.uzk.hki.da.sb.SIPFactory.Feedback;
 
+/**
+ * Runs the SIP-Builder in CLI mode
+ * 
+ * @author Thomas Kleinke
+ */
 class Cli {
 	
 	private String confFolderPath;
@@ -64,6 +69,11 @@ class Cli {
 		sipFactory.setLogger(logger);
 	}
 
+	/**
+	 * Starts the SIP building process in CLI mode
+	 * 
+	 * @return The return value (one of the values defined in SIPFactory.Feedback)
+	 */
 	public int start() {
 		
 		Feedback returnValue;
@@ -93,6 +103,11 @@ class Cli {
     	return sipFactory.getReturnCode().toInt();
 	}
 	
+	/**
+	 * Sets the values in the SIPFactory depending on the arguments passed to the SIP-Builder
+	 * 
+	 * @return The method result as a Feedback enum
+	 */
 	private Feedback configureSipFactory() {
 		
 		boolean contractRightsLoaded = false;
@@ -229,6 +244,11 @@ class Cli {
     	return Feedback.SUCCESS;
 	}
 	
+	/**
+	 * Checks if the SIPFactory's configuration settings are valid
+	 * 
+	 * @return The method result as a Feedback enum
+	 */
 	private Feedback checkConfiguration() {
 		
 		if (sipFactory.getCreateCollection() &&
@@ -292,6 +312,11 @@ class Cli {
     	return Feedback.SUCCESS;
 	}
 	
+	/**
+	 * Copies the files listed in a file list or SIP list to a single directory
+	 * 
+	 * @return The method result as a Feedback enum
+	 */
 	private Feedback copyFilesFromList() {
 		
 		if (fileListFile != null && sipListFile != null) {
@@ -336,6 +361,11 @@ class Cli {
     	return Feedback.SUCCESS;		
 	}
 	
+	/**
+	 * Checks if the source folder chosen by the user is a valid source folder
+	 * 
+	 * @return The method result as a Feedback enum
+	 */
 	private Feedback checkSourceFolder() {
 		
 		UserInputValidator.Feedback feedback = UserInputValidator.checkPaths(sipFactory.getSourcePath(),
@@ -370,6 +400,12 @@ class Cli {
 		return Feedback.SUCCESS;
 	}
 
+	/**
+	 * Determines the parameter value of an argument
+	 * 
+	 * @param arg The argument
+	 * @return The parameter value
+	 */
     private String extractParameter(String arg) {
     	
     	int index = arg.indexOf('=');
@@ -386,6 +422,12 @@ class Cli {
     	return parameter;
     }
     
+    /**
+	 * Determines the parameter values of an argument
+	 * 
+	 * @param arg The argument
+	 * @return The parameter values as a string list
+	 */
     private List<String> extractParameters(String arg) {
     	
     	List<String> parameters = new ArrayList<String>();
@@ -419,6 +461,12 @@ class Cli {
     	return parameters;    	
     }
 
+    /**
+     * Copies the files listed in a file list to a single directory
+     * 
+     * @param fileListFile The file list file
+     * @return The path to the directory containing the files
+     */
     private String copySipContentToFolder(File fileListFile) {
 
     	CliProgressManager progressManager = new CliProgressManager();
@@ -484,6 +532,12 @@ class Cli {
     	return (tempDirectory.getAbsolutePath());    	
     }
     
+    /**
+     * Copies the files listed in a SIP list to a single directory
+     * 
+     * @param fileListFile The SIP list file
+     * @return The path to the directory containing the files
+     */
     private String copySipListContentToFolder(File sipListFile) {
 
     	CliProgressManager progressManager = new CliProgressManager();
@@ -592,6 +646,11 @@ class Cli {
     	return (new File(tempFolderName).getAbsolutePath());    	
     }
     
+    /**
+     * Returns a name for a temp folder that is not already existing
+     * 
+     * @return The temp folder name
+     */
     private String getTempFolderName() {
 		
     	String destinationPath = sipFactory.getDestinationPath();
@@ -608,6 +667,9 @@ class Cli {
 		return destinationPath + File.separator + tempFolderName;
 	}
     
+    /**
+     * Displays an overview of the possible arguments
+     */
     private void showHelp() {
     	
 		System.out.println("");

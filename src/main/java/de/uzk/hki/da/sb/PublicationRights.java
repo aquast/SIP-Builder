@@ -30,7 +30,9 @@ import java.util.List;
 import java.util.Set;
 
 /**
- * Saves the publication rights for one audience
+ * Contains the publication rights for one audience
+ * 
+ * @author Thomas Kleinke
  */
 class PublicationRights {
 
@@ -85,7 +87,6 @@ class PublicationRights {
 	 * 
 	 * @param startDate The start date as a text string
 	 * @return true if the date could be successfully parsed, false otherwise
-	 * @author Thomas Kleinke
 	 */
 	public boolean setStartDate(String startDate) {
 		
@@ -244,7 +245,6 @@ class PublicationRights {
 	 * result: "1 6 7 8 9 10 200"
 	 * 
 	 * @return List of pages as a single string
-	 * @author Thomas Kleinke
 	 */
 	public String parsePages() {
 		
@@ -356,7 +356,6 @@ class PublicationRights {
 	 * @param endPage The last page to add
 	 * @param pagesList The page list
 	 * @return true if the pages could be added, otherwise false
-	 * @author Thomas Kleinke
 	 */
 	private boolean addPagesToList(int startPage, int endPage, Set<Integer> pagesList) {
 		
@@ -376,7 +375,6 @@ class PublicationRights {
 	 * 
 	 * @param dateString The date as a text string
 	 * @return The date as a date object if the date string is a valid date, otherwise null
-	 * @author Thomas Kleinke
 	 */
 	private Date checkDate(String dateString) {
 		

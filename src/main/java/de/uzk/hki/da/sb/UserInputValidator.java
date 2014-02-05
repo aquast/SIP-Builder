@@ -25,7 +25,9 @@ import java.util.Arrays;
 import java.util.List;
 
 /**
- * Checks if the user input is complete and valid (e.g. if folder pathes exist etc.)
+ * Checks if the user input is complete and valid (e.g. if folder paths exist etc.)
+ * 
+ * @author Thomas Kleinke
  */
 class UserInputValidator {
 
@@ -55,7 +57,6 @@ class UserInputValidator {
 	 * @param destinationPath The destination path
 	 * @param kindOfSipBuilding The kind of SIP building chosen by the user
 	 * @return The validation result as a Feedback enum
-	 * @author Thomas Kleinke
 	 */
 	public static Feedback checkPaths(String sourcePath, String destinationPath,
 									  SIPFactory.KindOfSIPBuilding kindOfSipBuilding) {
@@ -92,7 +93,6 @@ class UserInputValidator {
 	 * @param collectionName The collection name
 	 * @param destinationPath The destination path
 	 * @return The validation result as a Feedback enum
-	 * @author Thomas Kleinke
 	 */
 	public static Feedback checkCollectionName(String collectionName, String destinationPath) {
 		
@@ -115,7 +115,6 @@ class UserInputValidator {
 	 * 
 	 * @param sipName The SIP name
 	 * @return The validation result as a Feedback enum
-	 * @author Thomas Kleinke
 	 */
 	public static Feedback checkSipName(String sipName) {
 		
@@ -132,7 +131,6 @@ class UserInputValidator {
 	 * 
 	 * @param date the date as a string
 	 * @return The validation result as a Feedback enum
-	 * @author Thomas Kleinke
 	 */
 	public static Feedback checkDate(String date) {
 

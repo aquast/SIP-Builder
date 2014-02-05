@@ -54,6 +54,11 @@ import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 import javax.swing.filechooser.FileFilter;
 
+/**
+ * Displays the graphical user interface and reacts to user input
+ * 
+ * @author Thomas Kleinke
+ */
 class Gui extends JFrame{
 
 	private static final long serialVersionUID = -2783837120567684391L;
@@ -349,6 +354,9 @@ class Gui extends JFrame{
 		initialize();
 	}		
 
+	/**
+	 * Initializes every element of the graphical user interface
+	 */
 	public void initialize() {
 
 		initializePanels();
@@ -369,9 +377,12 @@ class Gui extends JFrame{
 		addElementsToContentPane();
 		createListeners();
 
-		loadLastSessionPaths();
+		loadLastSessionSettings();
 	}
 
+	/**
+	 * Creates the panels ( = SIP-Builder steps)
+	 */
 	private void initializePanels() {
 
 		institutionTabbedPane = new JTabbedPane();
@@ -430,6 +441,9 @@ class Gui extends JFrame{
 		createPanel.setVisible(false);		 
 	}
 
+	/**
+	 * Creates the labels responsible for diplaying the background image
+	 */
 	private void initializeImageLabels() {
 
 		URL backgroundImage = classloader.getResource("images/background.png");
@@ -447,6 +461,9 @@ class Gui extends JFrame{
 		backgroundCreateImageLabel = new JLabel(new ImageIcon(backgroundImage));
 	}
 
+	/**
+	 * Creates the text labels
+	 */
 	private void initializeTextLabels() {
 
 		versionInfoLabel = new JLabel("SIP-Builder v" + Utilities.getSipBuilderVersion() + 
@@ -549,6 +566,9 @@ class Gui extends JFrame{
 		sipProgressStepLabel.setHorizontalAlignment(JLabel.CENTER);
 	}
 
+	/**
+	 * Creates the buttons
+	 */
 	private void initializeButtons() {
 
 		URL helpImage = classloader.getResource("images/help.png");
@@ -835,6 +855,9 @@ class Gui extends JFrame{
 		createIconButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
 	}
 
+	/**
+	 * Creates the text areas
+	 */
 	private void initializeTextAreas() {
 
 		welcomeArea = new JTextArea();
@@ -1059,6 +1082,9 @@ class Gui extends JFrame{
 				"Bitte beachten Sie, dass in diesem Fall größere SIP-Dateien erzeugt werden.");
 	}
 
+	/**
+	 * Creates the radio buttons and radio button groups
+	 */
 	private void initializeRadioButtons() {
 
 		institutionAllowRadioButton = new JRadioButton("Ja", false);
@@ -1116,6 +1142,9 @@ class Gui extends JFrame{
 		publicTempLawGroup.add(publicLawRadioButton);
 	}
 
+	/**
+	 * Creates the check boxes
+	 */
 	private void initializeCheckBoxes() {
 
 		collectionCheckBox = new JCheckBox("SIPs zu einer Lieferung bündeln", false);
@@ -1169,6 +1198,9 @@ class Gui extends JFrame{
 		compressionCheckBox.setFont(standardFont.deriveFont(12.0f));
 	}
 
+	/**
+	 * Creates the text fields
+	 */
 	private void initializeTextFields() {
 
 		sourcePathTextField = new JTextField();
@@ -1207,6 +1239,9 @@ class Gui extends JFrame{
 		publicRestrictionImageTextField.setEditable(false);
 	}
 
+	/**
+	 * Creates the combo boxes (drop down menus)
+	 */
 	private void initializeComboBoxes() {
 
 		kindOfSIPBuildingDropDown = new JComboBox<String>();
@@ -1349,9 +1384,10 @@ class Gui extends JFrame{
 		migrationDropDown.addItem("Zustimmung für Migration einholen");
 	}
 
+	/**
+	 * Sets the initial position of every GUI element
+	 */
 	private void defineElementPositions() {
-
-		// Positioning of textfields, buttons etc.
 
 		// overall elements
 		versionInfoLabel.setBounds(0, 472, 750, 20);
@@ -1579,9 +1615,10 @@ class Gui extends JFrame{
 		backgroundCreateImageLabel.setBounds(0, 0, 750, 526);	 
 	}
 
+	/**
+	 * Adds the GUI elements to the content pane and the panels they belong to
+	 */
 	private void addElementsToContentPane() {
-
-		// Add labels, textfields etc. to contentpane
 
 		getContentPane().add(startActivatedIconButton);
 		getContentPane().add(startIconButton);
@@ -1811,6 +1848,9 @@ class Gui extends JFrame{
 		getContentPane().setLayout(null);
 	}
 
+	/**
+	 * Creates action listeners for certain GUI elements to let them react with user input
+	 */
 	private void createListeners() {
 
 		helpIconButton.addActionListener(new ActionListener(){
@@ -2715,7 +2755,10 @@ class Gui extends JFrame{
 		});
 	}
 
-	private void loadLastSessionPaths() {
+	/**
+	 * Restores the file paths and compression setting chosen by the user in the last session
+	 */
+	private void loadLastSessionSettings() {
 		File sourceFolderFile = new File(dataFolderPath + File.separator + "srcPath.sav");
 		File destinationFolderFile = new File(dataFolderPath + File.separator + "destPath.sav");
 		File contractRightsLoadFolderFile = new File(dataFolderPath + File.separator + "crloadPath.sav");
@@ -2768,6 +2811,12 @@ class Gui extends JFrame{
 		}
 	}
 
+	/**
+	 * Checks if the current section (= panel) contains invalid settings/user input and makes the current panel invisible if no
+	 * problems exist
+	 * 
+	 * @return true if the section could be left, otherwise false
+	 */
 	private boolean leaveSection() {
 
 		if (startPanel.isVisible()) {
@@ -3028,6 +3077,9 @@ class Gui extends JFrame{
 		return true;
 	}
 
+	/**
+	 * Shows the start panel
+	 */
 	private void enterStartSection() {
 
 		if (!startPanel.isVisible() && leaveSection()) {
@@ -3037,6 +3089,9 @@ class Gui extends JFrame{
 		}
 	}
 
+	/**
+	 * Shows the load panel
+	 */
 	private void enterLoadSection() {
 
 		if (!loadStandardPanel.isVisible() && leaveSection()) {
@@ -3046,6 +3101,9 @@ class Gui extends JFrame{
 		}
 	}
 
+	/**
+	 * Shows the publication for institution panel
+	 */
 	private void enterPublicationInstitutionSection() {
 
 		if (!institutionPanel.isVisible() && leaveSection()) {
@@ -3057,6 +3115,12 @@ class Gui extends JFrame{
 		}
 	}
 
+	/**
+	 * Shows the publication for institution temp restriction panel
+	 * 
+	 * @return false if publication for institution is deactivated and the section
+	 * can't be entered, otherwise true
+	 */
 	private boolean enterPublicationInstitutionTempSection() {
 
 		if (institutionDenyRadioButton.isSelected())
@@ -3074,6 +3138,12 @@ class Gui extends JFrame{
 		return true;
 	}
 
+	/**
+	 * Shows the publication for institution restrictions panel
+	 * 
+	 * @return false if publication for institution is deactivated and the section
+	 * can't be entered, otherwise true
+	 */
 	private boolean enterPublicationInstitutionRestrictionsSection() {
 
 		if (institutionDenyRadioButton.isSelected())
@@ -3091,6 +3161,9 @@ class Gui extends JFrame{
 		return true;
 	}
 
+	/**
+	 * Shows the publication for public panel
+	 */
 	private void enterPublicationPublicSection() {
 
 		if (!publicPanel.isVisible() && leaveSection()) {
@@ -3102,6 +3175,12 @@ class Gui extends JFrame{
 		}
 	}
 
+	/**
+	 * Shows the publication for public temp restriction panel 
+	 * 
+	 * @return false if publication for public is deactivated and the section
+	 * can't be entered, otherwise true
+	 */
 	private boolean enterPublicationPublicTempSection() {
 
 		if (publicDenyRadioButton.isSelected())
@@ -3119,6 +3198,12 @@ class Gui extends JFrame{
 		return true;
 	}
 
+	/**
+	 * Shows the publication for public restrictions panel
+	 * 
+	 * @return false if publication for public is deactivated and the section
+	 * can't be entered, otherwise true
+	 */
 	private boolean enterPublicationPublicRestrictionsSection() {
 
 		if (publicDenyRadioButton.isSelected())
@@ -3136,6 +3221,9 @@ class Gui extends JFrame{
 		return true;
 	}
 
+	/**
+	 * Shows the migration panel
+	 */
 	private void enterMigrationSection() {
 
 		if (!migrationPanel.isVisible() && leaveSection()) {
@@ -3145,6 +3233,9 @@ class Gui extends JFrame{
 		}
 	}
 
+	/**
+	 * Shows the save panel
+	 */
 	private void enterSaveSection() {
 
 		if (!savePanel.isVisible() && leaveSection()) {
@@ -3160,6 +3251,9 @@ class Gui extends JFrame{
 		}
 	}
 
+	/**
+	 * Shows the create panel
+	 */
 	private void enterCreateSection() {
 
 		if (!createPanel.isVisible() && leaveSection()) {
@@ -3172,6 +3266,9 @@ class Gui extends JFrame{
 		}
 	}
 	
+	/**
+	 * Copies the GUI settings made by the user to the contract rights
+	 */
 	private void updateContractRights() {
 		
 		ContractRights contractRights = sipFactory.getContractRights();
@@ -3227,6 +3324,9 @@ class Gui extends JFrame{
 		contractRights.setDdbExclusion(!publicDDBCheckBox.isSelected());
 	}
 
+	/**
+	 * Copies the contract rights settings to the respective GUI elements
+	 */
 	private void updateValues() {
 
 		ContractRights contractRights = sipFactory.getContractRights();
@@ -3541,6 +3641,11 @@ class Gui extends JFrame{
 		publicDDBCheckBox.setSelected(!contractRights.getDdbExclusion());
 	}
 	
+	/**
+	 * Creates a text that summarizes the settings chosen by the user
+	 * 
+	 * @return The settings overview text
+	 */
 	private String createSettingsOverviewText() {
 		ContractRights contractRights = sipFactory.getContractRights();
 		PublicationRights institutionRights = contractRights.getInstitutionRights();
@@ -3621,7 +3726,12 @@ class Gui extends JFrame{
 		return settingsOverview;
 	}
 
-	// searchFolder sets the source and destination path of the packages
+	/**
+	 * Shows a file dialog that lets the user choose a certain directory
+	 * 
+	 * @param fileChooser The file chooser object used to display the file dialog
+	 * @return The path to the folder chosen by the user
+	 */
 	private String searchFolder(JFileChooser fileChooser) {
 
 		File selectedFile = null;
@@ -3641,6 +3751,11 @@ class Gui extends JFrame{
 			return null;
 	}
 
+	/**
+	 * Shows a file dialog that lets the user choose a certain xml file
+	 * 
+	 * @return The path to the xml file chosen by the user
+	 */
 	private String searchXmlFile() {
 
 		File selectedFile = null;
@@ -3670,6 +3785,12 @@ class Gui extends JFrame{
 		return null;
 	}
 
+	/**
+	 * Saves the contract rights settings to an xml file
+	 * 
+	 * @param defaultFileName The default name of the target file 
+	 * @return The path to the newly created xml file 
+	 */
 	private String saveFile(String defaultFileName) {
 
 		File selectedFile = null;

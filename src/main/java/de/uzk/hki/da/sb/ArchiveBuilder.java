@@ -30,12 +30,28 @@ import org.apache.commons.compress.compressors.gzip.GzipCompressorOutputStream;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
 
+/**
+ * Creates archive files (tar and tgz)
+ * 
+ * @author Thomas Kleinke
+ */
 class ArchiveBuilder {
 	
 	private ProgressManager progressManager;
 	private int jobId;
 	private SIPFactory.SipBuildingProcess sipBuildingProcess;
 
+	/**
+	 * Create an archive file out of the given source folder
+	 * 
+	 * @param srcFolder The folder to archive
+	 * @param destFile The archive file to build
+	 * @param includeFolder Indicates if the source folder will be included to the archive file on
+	 * the first level or not
+	 * @param compress Indicates if the archive file will be compressed (tgz file) or not (tar file)
+	 * @return false if the SIP creation process was aborted during the archive file creation process, otherwise true
+	 * @throws Exception
+	 */
 	public boolean archiveFolder(File srcFolder, File destFile, boolean includeFolder, boolean compress)
 			throws Exception {
 
@@ -82,9 +98,11 @@ class ArchiveBuilder {
 	}
 
 	/**
-	 * @param tOut
-	 * @param the actual file that should be added
-	 * @param base
+	 * Adds the given file to the archive
+	 * 
+	 * @param tOut The tar archive output stream
+	 * @param file The file to add
+	 * @param base The relative path to the file inside the archive (without the file name)
 	 * @throws IOException
 	 */
 	private boolean addFileToArchive(TarArchiveOutputStream tOut, File file, String base) throws IOException{

@@ -37,7 +37,11 @@ import org.xml.sax.SAXException;
 import org.xml.sax.SAXParseException;
 import org.xml.sax.XMLReader;
 
-
+/**
+ * The contract rights settings chosen by the user
+ * 
+ * @author Thomas Kleinke
+ */
 public class ContractRights {
 	
 	private PublicationRights institutionRights = new PublicationRights();
@@ -49,6 +53,12 @@ public class ContractRights {
 	enum ConversionCondition { NONE, NOTIFY, CONFIRM };
 	
 
+	/**
+	 * Restores the contract rights settings from a previously created XML file
+	 * 
+	 * @param contractRightsFile The contract rights XML file
+	 * @throws Exception
+	 */
 	public void loadContractRightsFromFile(File contractRightsFile) throws Exception {
 		
 		institutionRights = new PublicationRights();

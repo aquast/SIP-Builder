@@ -25,7 +25,9 @@ import javax.swing.JLabel;
 import javax.swing.JProgressBar;
 
 /**
- * A specialized progress manager responsible for updating the progress bar in GUI mode 
+ * A specialized progress manager responsible for updating the progress bar in GUI mode
+ * 
+ *  @author Thomas Kleinke
  */
 class GuiProgressManager extends ProgressManager {
 	
@@ -42,8 +44,6 @@ class GuiProgressManager extends ProgressManager {
 	
 	/**
 	 * Resets the progress bar to its initial state
-	 * 
-	 * @author Thomas Kleinke
 	 */
 	@Override
 	public void reset() {		
@@ -60,8 +60,6 @@ class GuiProgressManager extends ProgressManager {
 
 	/**
 	 * Creates an abort message and disables the progress bar
-	 * 
-	 * @author Thomas Kleinke
 	 */
 	@Override
 	public void abort() {
@@ -92,7 +90,6 @@ class GuiProgressManager extends ProgressManager {
 	 * Informs the progress manager that a certain job is active now and displays a text message
 	 * 
 	 * @param id The ID of the job to start
-	 * @author Thomas Kleinke
 	 */
 	@Override
 	public void startJob(int id) {
@@ -117,7 +114,6 @@ class GuiProgressManager extends ProgressManager {
 	 * 
 	 * @param id The job ID
 	 * @param processedData The amount of data already copied
-	 * @author Thomas Kleinke
 	 */
 	@Override
 	public void copyProgress(int id, long processedData) {
@@ -137,7 +133,6 @@ class GuiProgressManager extends ProgressManager {
 	 * 
 	 * @param id The job ID
 	 * @param progress The premis creation progress in percent
-	 * @author Thomas Kleinke
 	 */
 	@Override
 	public void premisProgress(int id, double progress) {
@@ -157,7 +152,6 @@ class GuiProgressManager extends ProgressManager {
 	 * 
 	 * @param id The job ID
 	 * @param progress The BagIt metadata creation progress in percent
-	 * @author Thomas Kleinke
 	 */
 	@Override
 	public void bagitProgress(int id, double progress) {
@@ -177,7 +171,6 @@ class GuiProgressManager extends ProgressManager {
 	 * 
 	 * @param id The job ID
 	 * @param archivedData The amount of data already archived
-	 * @author Thomas Kleinke
 	 */
 	@Override
 	public void archiveProgress(int id, long archivedData) {
@@ -197,7 +190,6 @@ class GuiProgressManager extends ProgressManager {
 	 * 
 	 * @param id The job ID
 	 * @param progress The temporary file deletion progress in percent
-	 * @author Thomas Kleinke
 	 */
 	@Override
 	public void deleteTempProgress(int id, double progress) {
@@ -216,7 +208,6 @@ class GuiProgressManager extends ProgressManager {
 	 * Skips the job (e.g. if the user chose to not overwrite an already existing SIP)
 	 * 
 	 * @param id The ID of the job to skip
-	 * @author Thomas Kleinke
 	 */
 	@Override
 	public void skipJob(int id) {
@@ -233,7 +224,6 @@ class GuiProgressManager extends ProgressManager {
 	 * Creates a success message
 	 * 
 	 * @param skippedFiles Indicates if some files were skipped during the SIP creation process
-	 * @author Thomas Kleinke
 	 */
 	@Override
 	public void createSuccessMessage(boolean skippedFiles) {

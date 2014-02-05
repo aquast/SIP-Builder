@@ -21,6 +21,8 @@ package de.uzk.hki.da.sb;
 
 /**
  * A specialized message writer responsible for displaying info messages in CLI mode
+ * 
+ * @author Thomas Kleinke
  */
 class CliMessageWriter extends MessageWriter{
 
@@ -30,7 +32,6 @@ class CliMessageWriter extends MessageWriter{
 	 * Displays a message
 	 * 
 	 * @param message The message to display
-	 * @author Thomas Kleinke
 	 */
 	@Override
 	public void showMessage(String message) {
@@ -42,7 +43,6 @@ class CliMessageWriter extends MessageWriter{
 	 * 
 	 * @param message The message to display
 	 * @param type Not necessary in CLI mode
-	 * @author Thomas Kleinke
 	 */
 	@Override
 	public void showMessage(String message, int type) {
@@ -55,7 +55,6 @@ class CliMessageWriter extends MessageWriter{
 	 * 
 	 * @param message Not necessary in CLI mode
 	 * @return The previously set standard answer
-	 * @author Thomas Kleinke
 	 */
 	@Override
 	public UserInput showOverwriteDialog(String message) {
@@ -69,7 +68,6 @@ class CliMessageWriter extends MessageWriter{
 	 * 
 	 * @param message Not necessary in CLI mode
 	 * @return The previously set standard answer
-	 * @author Thomas Kleinke
 	 */
 	@Override
 	public UserInput showCollectionOverwriteDialog(String message) {
@@ -84,8 +82,6 @@ class CliMessageWriter extends MessageWriter{
 	
 	/**
 	 * Displays a message that informs the user about which zero byte files were found
-	 * 
-	 * @author Thomas Kleinke
 	 */
 	public void showZeroByteFileMessage() {
 		
@@ -110,7 +106,6 @@ class CliMessageWriter extends MessageWriter{
 	 * Sets the standard answer that is returned in showOverwriteDialog and showCollectionOverwriteDialog
 	 * 
 	 * @param standardAnswer
-	 * @author Thomas Kleinke
 	 */
 	public void setStandardAnswer(UserInput standardAnswer) {
 		this.standardAnswer = standardAnswer;

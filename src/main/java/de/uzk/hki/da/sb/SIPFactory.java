@@ -36,6 +36,8 @@ import org.apache.commons.io.FileUtils;
 
 /**
  * The central SIP production class
+ * 
+ * @author Thomas Kleinke
  */
 public class SIPFactory {
 
@@ -113,8 +115,6 @@ public class SIPFactory {
 
 	/**
 	 * Creates and starts a new SIP building process
-	 * 
-	 * @author Thomas Kleinke
 	 */
 	public void startSIPBuilding() {
 
@@ -127,7 +127,6 @@ public class SIPFactory {
 	 * Creates a list of source folders
 	 * 
 	 * @param folderPath The main source folder path
-	 * @author Thomas Kleinke
 	 */
 	private List<File> createFolderList(String folderPath) {
 
@@ -159,7 +158,6 @@ public class SIPFactory {
 	 * 
 	 * @param folderList The source folder list
 	 * @return The method result as a Feedback enum
-	 * @author Thomas Kleinke
 	 */
 	private Feedback initializeProgressManager(List<File> folderList) {
 
@@ -191,7 +189,6 @@ public class SIPFactory {
 	 * @param jobId The job ID
 	 * @param sourceFolder The source folder
 	 * @return The method result as a Feedback enum
-	 * @author Thomas Kleinke
 	 */
 	private Feedback buildSIP(int jobId, File sourceFolder) {
 
@@ -266,7 +263,6 @@ public class SIPFactory {
 	 * @param sourceFolder The source folder
 	 * @param tempFolder The temp folder
 	 * @return The method result as a Feedback enum
-	 * @author Thomas Kleinke
 	 */
 	private Feedback copyFolder(int jobId, File sourceFolder, File tempFolder) {
 
@@ -298,7 +294,6 @@ public class SIPFactory {
 	 * @param folder The temp folder
 	 * @param packageName The package name
 	 * @return The method result as a Feedback enum
-	 * @author Thomas Kleinke
 	 */
 	private Feedback createPremisFile(int jobId, File folder, String packageName) {
 
@@ -331,7 +326,6 @@ public class SIPFactory {
 	 * @param jobId The job ID
 	 * @param folder The temp folder
 	 * @return The method result as a Feedback enum
-	 * @author Thomas Kleinke
 	 */
 	private Feedback createBag(int jobId, File folder) {
 
@@ -371,7 +365,6 @@ public class SIPFactory {
 	 * @param folder The folder to archive
 	 * @param archiveFile The target archive file
 	 * @return The method result as a Feedback enum
-	 * @author Thomas Kleinke
 	 */
 	private Feedback buildArchive(int jobId, File folder, File archiveFile) {
 
@@ -401,7 +394,6 @@ public class SIPFactory {
 	 * @param jobId The job ID
 	 * @param folder The temp folder to delete
 	 * @return The method result as a Feedback enum
-	 * @author Thomas Kleinke
 	 */
 	private Feedback deleteTempFolder(int jobId, File folder) {
 
@@ -425,7 +417,6 @@ public class SIPFactory {
 	 * @param jobId The job ID
 	 * @param archiveFile The SIP file
 	 * @return The method result as a Feedback enum
-	 * @author Thomas Kleinke
 	 */
 	private Feedback moveSipToCollectionFolder(int jobId, File archiveFile) {
 
@@ -447,7 +438,6 @@ public class SIPFactory {
 	 * @param folderName The name of the folder to check
 	 * @return true if no existing SIP for the given folderName is found or the user decides to overwrite the existing SIP
 	 * @return false if a SIP for the given folderName already exists and the user decides to abort the SIP creation process
-	 * @author Thomas Kleinke
 	 */
 	private boolean checkForExistingSip(String folderName){
 
@@ -519,8 +509,6 @@ public class SIPFactory {
 	/**
 	 * This method is called by the SIP building process.
 	 * It deletes partially created collections and aborts the progress manager.
-	 *  
-	 * @author Thomas Kleinke
 	 */
 	private void abortSipBuilding() {
 
@@ -533,17 +521,13 @@ public class SIPFactory {
 
 	/**
 	 * Aborts the SIP building process
-	 * 
-	 * @author Thomas Kleinke
 	 */
 	public void abort() {
 		sipBuildingProcess.abort();
 	}
 
 	/**
-	 *  
 	 * @return true if the SIP building process is working, otherwise false
-	 * @author Thomas Kleinke
 	 */
 	public boolean isWorking() {
 
@@ -668,7 +652,9 @@ public class SIPFactory {
 
 
 	/**
-	 * The SIP building procedure is run in its own thread to prevent GUI freezing 
+	 * The SIP building procedure is run in its own thread to prevent GUI freezing
+	 * 
+	 * @author Thomas Kleinke
 	 */
 	public class SipBuildingProcess extends Thread {
 
@@ -676,8 +662,6 @@ public class SIPFactory {
 
 		/**
 		 * Creates one ore more SIPs as specified by the user
-		 * 
-		 * @author Thomas Kleinke
 		 */
 		public void run() {
 

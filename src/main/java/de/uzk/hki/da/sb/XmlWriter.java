@@ -37,6 +37,8 @@ import javax.xml.stream.XMLStreamWriter;
 
 /**
  * Provides methods for XML file creation (premis.xml and Contract-XML)
+ * 
+ * @author Thomas Kleinke
  */
 class XmlWriter {
 
@@ -54,7 +56,6 @@ class XmlWriter {
 	 * @param f The premis file to create
 	 * @param packageName The package name
 	 * @throws Exception
-	 * @author Thomas Kleinke
 	 */
 	public void createPremisFile(SIPFactory sip, File f, String packageName) throws Exception {
 		
@@ -70,7 +71,6 @@ class XmlWriter {
 	 * taken from the SIPFactory)
 	 * @param packageName The package name
 	 * @throws Exception
-	 * @author Thomas Kleinke
 	 */
 	public void createPremisFile(SIPFactory sip, File f, File rightsSourcePremisFile, String packageName) throws Exception {
 		
@@ -120,7 +120,6 @@ class XmlWriter {
 	 * @param contractRights The contracts rights to serialize
 	 * @param f The contracts rights file
 	 * @throws Exception
-	 * @author Thomas Kleinke
 	 */
 	public void createContractRightsFile(ContractRights contractRights, File f) throws Exception {
 
@@ -165,7 +164,6 @@ class XmlWriter {
 	 * 
 	 * @param pubRights The publication rights to serialize
 	 * @throws Exception
-	 * @author Thomas Kleinke
 	 */
 	private void generatePublicationRightsElement(PublicationRights pubRights) throws Exception {
 		
@@ -212,7 +210,6 @@ class XmlWriter {
 	 * 
 	 * @param packageName The package name
 	 * @throws XMLStreamException
-	 * @author Thomas Kleinke
 	 */
 	private void generateObjectElement(String packageName) throws XMLStreamException {
 		
@@ -230,7 +227,6 @@ class XmlWriter {
 	 * 
 	 * @param packageName The package name
 	 * @throws XMLStreamException
-	 * @author Thomas Kleinke
 	 */
 	private void generateEventElement(String packageName) throws XMLStreamException {
 		
@@ -258,7 +254,6 @@ class XmlWriter {
 	 * Creates an agent element for the SIP-Builder
 	 * 
 	 * @throws XMLStreamException
-	 * @author Thomas Kleinke
 	 */
 	private void generateAgentElement() throws XMLStreamException {
 		
@@ -276,7 +271,6 @@ class XmlWriter {
 	 * 
 	 * @param contractRights The contract rights settings to serialize
 	 * @throws XMLStreamException
-	 * @author Thomas Kleinke
 	 */
 	private void generateRightsElement(ContractRights contractRights) throws XMLStreamException {
 		
@@ -542,12 +536,10 @@ class XmlWriter {
 	}
 	
 	/**
-	 * 
 	 * Copies the contract rights settings from an existing premis file to the newly created premis file
 	 * 
 	 * @param rightsSourcePremisFile - The premis file from which the rights settings are taken
 	 * @throws XMLStreamException
-	 * @author Thomas Kleinke
 	 */
 	private void copyRightsElementFromPremisFile(File rightsSourcePremisFile) throws XMLStreamException {
 

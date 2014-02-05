@@ -23,7 +23,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Responsible for displaying info messages and dialogs
+ * Responsible for displaying info messages and user dialogs
+ * 
+ * @author Thomas Kleinke
  */
 abstract class MessageWriter {
 	
@@ -70,7 +72,6 @@ abstract class MessageWriter {
 	/**
 	 * Adds a file name to the list of zero byte files that were found
 	 * @param zeroByteFile The file name to add
-	 * @author Thomas Kleinke
 	 */
 	public void addZeroByteFile(String zeroByteFile) {
 		zeroByteFiles.add(zeroByteFile);
@@ -78,7 +79,6 @@ abstract class MessageWriter {
 	
 	/**
 	 * Clears the list of zero byte files that were found
-	 * @author Thomas Kleinke
 	 */
 	public void resetZeroByteFiles() {
 		zeroByteFiles.clear();
@@ -86,7 +86,6 @@ abstract class MessageWriter {
 	
 	/**
 	 * @return The list of zero byte files that were found
-	 * @author Thomas Kleinke
 	 */
 	public List<String> getZeroByteFiles() {
 		return zeroByteFiles;

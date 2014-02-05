@@ -23,7 +23,9 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * The ProgressManager is responsible for updating the progress bars in both CLI and GUI modes 
+ * The ProgressManager is responsible for updating the progress bars in both CLI and GUI modes
+ * 
+ *  @author Thomas Kleinke
  */
 abstract class ProgressManager {
 
@@ -43,7 +45,6 @@ abstract class ProgressManager {
 	 * @param id The job ID
 	 * @param packageName The package name
 	 * @param folderSize The size of the package folder
-	 * @author Thomas Kleinke
 	 */
 	public void addJob(int id, String packageName, long folderSize) {
 		
@@ -58,8 +59,6 @@ abstract class ProgressManager {
 	
 	/**
 	 * Clears the job map and sets the total progress to 0
-	 * 
-	 * @author Thomas Kleinke
 	 */
 	public void reset() {
 		jobMap.clear();
@@ -75,7 +74,6 @@ abstract class ProgressManager {
 	 * Determines the share each job has in the total progress
 	 * 
 	 * @param createCollection Specifies if a collection will be created or not
-	 * @author Thomas Kleinke
 	 */
 	public void calculateProgressParts(boolean createCollection) {
 
@@ -107,7 +105,6 @@ abstract class ProgressManager {
 	 * Informs the progress manager that a certain job is active now
 	 * 
 	 * @param id The ID of the job to start
-	 * @author Thomas Kleinke
 	 */
 	abstract public void startJob(int id);
 	
@@ -116,7 +113,6 @@ abstract class ProgressManager {
 	 * 
 	 * @param id The job ID
 	 * @param processedData The amount of data already copied
-	 * @author Thomas Kleinke
 	 */
 	public void copyProgress(int id, long processedData) {
 		
@@ -136,7 +132,6 @@ abstract class ProgressManager {
 	 * 
 	 * @param id The job ID
 	 * @param progress The premis creation progress in percent
-	 * @author Thomas Kleinke
 	 */
 	public void premisProgress(int id, double progress) {
 		
@@ -152,7 +147,6 @@ abstract class ProgressManager {
 	 * 
 	 * @param id The job ID
 	 * @param progress The BagIt metadata creation progress in percent
-	 * @author Thomas Kleinke
 	 */
 	public void bagitProgress(int id, double progress) {
 			
@@ -171,7 +165,6 @@ abstract class ProgressManager {
 	 * 
 	 * @param id The job ID
 	 * @param archivedData The amount of data already archived
-	 * @author Thomas Kleinke
 	 */
 	public void archiveProgress(int id, long archivedData) {
 				
@@ -191,7 +184,6 @@ abstract class ProgressManager {
 	 * 
 	 * @param id The job ID
 	 * @param progress The temporary file deletion progress in percent
-	 * @author Thomas Kleinke
 	 */
 	public void deleteTempProgress(int id, double progress) {
 		
@@ -206,7 +198,6 @@ abstract class ProgressManager {
 	 * Skips the job (e.g. if the user chose to not overwrite an already existing SIP)
 	 * 
 	 * @param id The ID of the job to skip
-	 * @author Thomas Kleinke
 	 */
 	public void skipJob(int id) {
 		
@@ -219,7 +210,6 @@ abstract class ProgressManager {
 	 * Creates a success message
 	 * 
 	 * @param skippedFiles Indicates if some files were skipped during the SIP creation process
-	 * @author Thomas Kleinke
 	 */
 	public void createSuccessMessage(boolean skippedFiles) {
 		totalProgress = 100.0;
@@ -230,7 +220,6 @@ abstract class ProgressManager {
 	 * 
 	 * @param id The job ID
 	 * @param folderSize The folder size to set
-	 * @author Thomas Kleinke
 	 */
 	public void setJobFolderSize(int id, long folderSize) {
 		
@@ -238,7 +227,9 @@ abstract class ProgressManager {
 	}
 	
 	/**
-	 * Saves progress and folder size information for a SIP building process 
+	 * Saves progress and folder size information for a SIP building process
+	 * 
+	 * @author Thomas Kleinke
 	 */
 	class SIPCreationJob {
 		
@@ -262,7 +253,6 @@ abstract class ProgressManager {
 		 * 
 		 * @return The total progress including the progress of all previously created SIPs
 		 * and the progress of the SIP connected to this job
-		 * @author Thomas Kleinke
 		 */
 		public double getProgress() {
 			

@@ -20,7 +20,9 @@
 package de.uzk.hki.da.sb;
 
 /**
- * A specialized progress manager responsible for updating the progress bar in CLI mode 
+ * A specialized progress manager responsible for updating the progress bar in CLI mode
+ * 
+ *  @author Thomas Kleinke
  */
 class CliProgressManager extends ProgressManager {
 	
@@ -28,7 +30,6 @@ class CliProgressManager extends ProgressManager {
 	
 	/**
 	 * Creates an abort message
-	 * @author Thomas Kleinke
 	 */
 	@Override
 	public void abort() {
@@ -37,7 +38,6 @@ class CliProgressManager extends ProgressManager {
 
 	/**
 	 * Creates a start message
-	 * @author Thomas Kleinke
 	 */
 	@Override
 	public void createStartMessage() {
@@ -48,7 +48,6 @@ class CliProgressManager extends ProgressManager {
 	 * Informs the progress manager that a certain job is active now
 	 * 
 	 * @param id The ID of the job to start
-	 * @author Thomas Kleinke
 	 */
 	@Override
 	public void startJob(int id) {
@@ -64,7 +63,6 @@ class CliProgressManager extends ProgressManager {
 	 * 
 	 * @param id The job ID
 	 * @param processedData The amount of data already copied
-	 * @author Thomas Kleinke
 	 */
 	@Override
 	public void copyProgress(int id, long processedData) {
@@ -78,7 +76,6 @@ class CliProgressManager extends ProgressManager {
 	 * 
 	 * @param id The job ID
 	 * @param progress The premis creation progress in percent
-	 * @author Thomas Kleinke
 	 */
 	@Override
 	public void premisProgress(int id, double progress) {
@@ -92,7 +89,6 @@ class CliProgressManager extends ProgressManager {
 	 * 
 	 * @param id The job ID
 	 * @param progress The BagIt metadata creation progress in percent
-	 * @author Thomas Kleinke
 	 */
 	@Override
 	public void bagitProgress(int id, double progress) {
@@ -106,7 +102,6 @@ class CliProgressManager extends ProgressManager {
 	 * 
 	 * @param id The job ID
 	 * @param archivedData The amount of data already archived
-	 * @author Thomas Kleinke
 	 */
 	@Override
 	public void archiveProgress(int id, long archivedData) {
@@ -120,7 +115,6 @@ class CliProgressManager extends ProgressManager {
 	 * 
 	 * @param id The job ID
 	 * @param progress The temporary file deletion progress in percent
-	 * @author Thomas Kleinke
 	 */
 	@Override
 	public void deleteTempProgress(int id, double progress) {
@@ -132,8 +126,6 @@ class CliProgressManager extends ProgressManager {
 	/**
 	 * Updates the copy files from list progress (if a file list or SIP list is used to create
 	 * the SIP)
-	 * 
-	 * @author Thomas Kleinke 
 	 */
 	public void copyFilesFromListProgress() {
 		
@@ -146,7 +138,6 @@ class CliProgressManager extends ProgressManager {
 	 * Skips the job (e.g. if the user chose to not overwrite an already existing SIP)
 	 * 
 	 * @param id The ID of the job to skip
-	 * @author Thomas Kleinke
 	 */
 	@Override
 	public void skipJob(int id) {
@@ -158,7 +149,6 @@ class CliProgressManager extends ProgressManager {
 	 * Creates a success message
 	 * 
 	 * @param skippedFiles Indicates if some files were skipped during the SIP creation process
-	 * @author Thomas Kleinke
 	 */
 	@Override
 	public void createSuccessMessage(boolean skippedFiles) {
@@ -175,8 +165,6 @@ class CliProgressManager extends ProgressManager {
 	
 	/**
 	 * Updates the CLI progress bar according to the current totalProgress value
-	 * 
-	 * @author Thomas Kleinke
 	 */
 	private void updateProgressBar() {
 		
@@ -196,7 +184,6 @@ class CliProgressManager extends ProgressManager {
 	 * Sets the total number of files listed in a file list or SIP list
 	 * 
 	 * @param size The number of files listed in a file list or SIP list
-	 * @author Thomas Kleinke
 	 */
 	public void setTotalSize(long size) {
 		totalSize = size;

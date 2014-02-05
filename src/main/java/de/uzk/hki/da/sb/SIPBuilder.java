@@ -36,6 +36,8 @@ import org.apache.log4j.Logger;
 
 /**
  * Main class; starts GUI or CLI mode
+ * 
+ * @author Thomas Kleinke
  */
 class SIPBuilder {
 	
@@ -77,7 +79,6 @@ class SIPBuilder {
      * 
      * @param confFolderPath Path to conf folder
      * @param dataFolderPath Path to data folder
-     * @author Thomas Kleinke
      */
     private static void startGUIMode(String confFolderPath, String dataFolderPath) {
     	
