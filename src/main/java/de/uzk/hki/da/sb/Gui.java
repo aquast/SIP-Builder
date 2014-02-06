@@ -2176,7 +2176,6 @@ class Gui extends JFrame{
 
 			public void actionPerformed(ActionEvent e){
 				abortButton.setEnabled(false);
-				compressionCheckBox.setEnabled(true);
 				sipFactory.abort();
 			}
 		});
