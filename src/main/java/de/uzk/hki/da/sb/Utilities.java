@@ -42,7 +42,7 @@ import de.uzk.hki.da.sb.SIPFactory.KindOfSIPBuilding;
  */
 class Utilities {
 	
-	private static final String sipBuilderVersion = "0.6.4";
+	private static final String sipBuilderVersion = "0.6.5";
 	
 	/**
 	 * String to enum translation method
