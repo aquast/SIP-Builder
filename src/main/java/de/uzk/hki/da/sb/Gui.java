@@ -289,24 +289,24 @@ class Gui extends JFrame{
 
 
 	// Comboboxes
-	JComboBox<String> kindOfSIPBuildingDropDown;
-	JComboBox<String> institutionLawIdDropDown;
-	JComboBox<String> institutionImageDropDown;
-	JComboBox<String> institutionImageTextDropDown;
-	JComboBox<String> institutionImageTextOpacityDropDown;
-	JComboBox<String> institutionImageTextSizeDropDown;
-	JComboBox<String> institutionAudioDurationDropDown;
-	JComboBox<String> institutionVideoQualityDropDown;
-	JComboBox<String> institutionVideoDurationDropDown;
-	JComboBox<String> publicLawIdDropDown;
-	JComboBox<String> publicImageDropDown;
-	JComboBox<String> publicImageTextDropDown;
-	JComboBox<String> publicImageTextOpacityDropDown;
-	JComboBox<String> publicImageTextSizeDropDown;
-	JComboBox<String> publicAudioDurationDropDown;
-	JComboBox<String> publicVideoQualityDropDown;
-	JComboBox<String> publicVideoDurationDropDown;
-	JComboBox<String> migrationDropDown;
+	JComboBox kindOfSIPBuildingDropDown;
+	JComboBox institutionLawIdDropDown;
+	JComboBox institutionImageDropDown;
+	JComboBox institutionImageTextDropDown;
+	JComboBox institutionImageTextOpacityDropDown;
+	JComboBox institutionImageTextSizeDropDown;
+	JComboBox institutionAudioDurationDropDown;
+	JComboBox institutionVideoQualityDropDown;
+	JComboBox institutionVideoDurationDropDown;
+	JComboBox publicLawIdDropDown;
+	JComboBox publicImageDropDown;
+	JComboBox publicImageTextDropDown;
+	JComboBox publicImageTextOpacityDropDown;
+	JComboBox publicImageTextSizeDropDown;
+	JComboBox publicAudioDurationDropDown;
+	JComboBox publicVideoQualityDropDown;
+	JComboBox publicVideoDurationDropDown;
+	JComboBox migrationDropDown;
 
 
 	// ProgressBar
@@ -1244,18 +1244,18 @@ class Gui extends JFrame{
 	 */
 	private void initializeComboBoxes() {
 
-		kindOfSIPBuildingDropDown = new JComboBox<String>();
+		kindOfSIPBuildingDropDown = new JComboBox();
 		kindOfSIPBuildingDropDown.setFont(standardFont.deriveFont(11.0f));
 		kindOfSIPBuildingDropDown.addItem("Einzelnes SIP aus dem Quellverzeichnis erstellen");
 		kindOfSIPBuildingDropDown.addItem("Mehrere SIPs aus Unterordnern des Quellverzeichnisses erstellen");
 
-		institutionLawIdDropDown = new JComboBox<String>();
+		institutionLawIdDropDown = new JComboBox();
 		institutionLawIdDropDown.setFont(standardFont.deriveFont(11.0f));
 		institutionLawIdDropDown.setEnabled(false);
 		institutionLawIdDropDown.addItem("ePflicht");
 		institutionLawIdDropDown.addItem("UrhG DE");
 
-		institutionImageDropDown = new JComboBox<String>();
+		institutionImageDropDown = new JComboBox();
 		institutionImageDropDown.setFont(standardFont.deriveFont(11.0f));
 		institutionImageDropDown.addItem("Niedrig (" + contractSettings.getWidthImage(0) + "x" + contractSettings.getHeightImage(0) + ")");
 		institutionImageDropDown.addItem("Mittel (" + contractSettings.getWidthImage(1) + "x" + contractSettings.getHeightImage(1) + ")");
@@ -1265,7 +1265,7 @@ class Gui extends JFrame{
 		institutionImageDropDown.addItem(contractSettings.getPercentImage(2));
 		institutionImageDropDown.setEnabled(false);
 
-		institutionImageTextDropDown = new JComboBox<String>();
+		institutionImageTextDropDown = new JComboBox();
 		institutionImageTextDropDown.setFont(standardFont.deriveFont(11.0f));
 		institutionImageTextDropDown.addItem("Fußzeile");
 		institutionImageTextDropDown.addItem("Wasserzeichen (oben)");
@@ -1273,7 +1273,7 @@ class Gui extends JFrame{
 		institutionImageTextDropDown.addItem("Wasserzeichen (unten)");
 		institutionImageTextDropDown.setEnabled(false);
 
-		institutionImageTextOpacityDropDown = new JComboBox<String>();
+		institutionImageTextOpacityDropDown = new JComboBox();
 		institutionImageTextOpacityDropDown.setFont(standardFont.deriveFont(11.0f));
 		institutionImageTextOpacityDropDown.addItem(contractSettings.getOpacityImage(0) + "%");
 		institutionImageTextOpacityDropDown.addItem(contractSettings.getOpacityImage(1) + "%");
@@ -1282,7 +1282,7 @@ class Gui extends JFrame{
 		institutionImageTextOpacityDropDown.addItem(contractSettings.getOpacityImage(4) + "%");
 		institutionImageTextOpacityDropDown.setEnabled(false);
 
-		institutionImageTextSizeDropDown = new JComboBox<String>();
+		institutionImageTextSizeDropDown = new JComboBox();
 		institutionImageTextSizeDropDown.setFont(standardFont.deriveFont(11.0f));
 		institutionImageTextSizeDropDown.addItem(contractSettings.getTextSizeImage(0));
 		institutionImageTextSizeDropDown.addItem(contractSettings.getTextSizeImage(1));
@@ -1290,7 +1290,7 @@ class Gui extends JFrame{
 		institutionImageTextSizeDropDown.addItem(contractSettings.getTextSizeImage(3));
 		institutionImageTextSizeDropDown.setEnabled(false);
 
-		institutionAudioDurationDropDown = new JComboBox<String>();
+		institutionAudioDurationDropDown = new JComboBox();
 		institutionAudioDurationDropDown.setFont(standardFont.deriveFont(11.0f));
 		institutionAudioDurationDropDown.addItem(contractSettings.getDuration(0));
 		institutionAudioDurationDropDown.addItem(contractSettings.getDuration(1));
@@ -1298,14 +1298,14 @@ class Gui extends JFrame{
 		institutionAudioDurationDropDown.addItem(contractSettings.getDuration(3));
 		institutionAudioDurationDropDown.setEnabled(false);
 
-		institutionVideoQualityDropDown = new JComboBox<String>();
+		institutionVideoQualityDropDown = new JComboBox();
 		institutionVideoQualityDropDown.setFont(standardFont.deriveFont(11.0f));
 		institutionVideoQualityDropDown.addItem("Niedrig");
 		institutionVideoQualityDropDown.addItem("Mittel");
 		institutionVideoQualityDropDown.addItem("Hoch");
 		institutionVideoQualityDropDown.setEnabled(false);
 
-		institutionVideoDurationDropDown = new JComboBox<String>();
+		institutionVideoDurationDropDown = new JComboBox();
 		institutionVideoDurationDropDown.setFont(standardFont.deriveFont(11.0f));
 		institutionVideoDurationDropDown.addItem(contractSettings.getDuration(0));
 		institutionVideoDurationDropDown.addItem(contractSettings.getDuration(1));
@@ -1313,13 +1313,13 @@ class Gui extends JFrame{
 		institutionVideoDurationDropDown.addItem(contractSettings.getDuration(3));
 		institutionVideoDurationDropDown.setEnabled(false);
 
-		publicLawIdDropDown = new JComboBox<String>();
+		publicLawIdDropDown = new JComboBox();
 		publicLawIdDropDown.setFont(standardFont.deriveFont(11.0f));
 		publicLawIdDropDown.setEnabled(false);
 		publicLawIdDropDown.addItem("ePflicht");
 		publicLawIdDropDown.addItem("UrhG DE");
 
-		publicImageDropDown = new JComboBox<String>();
+		publicImageDropDown = new JComboBox();
 		publicImageDropDown.setFont(standardFont.deriveFont(11.0f));
 		publicImageDropDown.addItem("Niedrig (" + contractSettings.getWidthImage(0) + "x" + contractSettings.getHeightImage(0) + ")");
 		publicImageDropDown.addItem("Mittel (" + contractSettings.getWidthImage(1) + "x" + contractSettings.getHeightImage(1) + ")");
@@ -1329,7 +1329,7 @@ class Gui extends JFrame{
 		publicImageDropDown.addItem(contractSettings.getPercentImage(2));
 		publicImageDropDown.setEnabled(false);
 
-		publicImageTextDropDown = new JComboBox<String>();
+		publicImageTextDropDown = new JComboBox();
 		publicImageTextDropDown.setFont(standardFont.deriveFont(11.0f));
 		publicImageTextDropDown.addItem("Fußzeile");
 		publicImageTextDropDown.addItem("Wasserzeichen (oben)");
@@ -1337,7 +1337,7 @@ class Gui extends JFrame{
 		publicImageTextDropDown.addItem("Wasserzeichen (unten)");
 		publicImageTextDropDown.setEnabled(false);
 
-		publicImageTextOpacityDropDown = new JComboBox<String>();
+		publicImageTextOpacityDropDown = new JComboBox();
 		publicImageTextOpacityDropDown.setFont(standardFont.deriveFont(11.0f));
 		publicImageTextOpacityDropDown.addItem(contractSettings.getOpacityImage(0) + "%");
 		publicImageTextOpacityDropDown.addItem(contractSettings.getOpacityImage(1) + "%");
@@ -1346,7 +1346,7 @@ class Gui extends JFrame{
 		publicImageTextOpacityDropDown.addItem(contractSettings.getOpacityImage(4) + "%");
 		publicImageTextOpacityDropDown.setEnabled(false);
 
-		publicImageTextSizeDropDown = new JComboBox<String>();
+		publicImageTextSizeDropDown = new JComboBox();
 		publicImageTextSizeDropDown.setFont(standardFont.deriveFont(11.0f));
 		publicImageTextSizeDropDown.addItem(contractSettings.getTextSizeImage(0));
 		publicImageTextSizeDropDown.addItem(contractSettings.getTextSizeImage(1));
@@ -1354,7 +1354,7 @@ class Gui extends JFrame{
 		publicImageTextSizeDropDown.addItem(contractSettings.getTextSizeImage(3));
 		publicImageTextSizeDropDown.setEnabled(false);
 
-		publicAudioDurationDropDown = new JComboBox<String>();
+		publicAudioDurationDropDown = new JComboBox();
 		publicAudioDurationDropDown.setFont(standardFont.deriveFont(11.0f));
 		publicAudioDurationDropDown.addItem(contractSettings.getDuration(0));
 		publicAudioDurationDropDown.addItem(contractSettings.getDuration(1));
@@ -1362,14 +1362,14 @@ class Gui extends JFrame{
 		publicAudioDurationDropDown.addItem(contractSettings.getDuration(3));
 		publicAudioDurationDropDown.setEnabled(false);
 
-		publicVideoQualityDropDown = new JComboBox<String>();
+		publicVideoQualityDropDown = new JComboBox();
 		publicVideoQualityDropDown.setFont(standardFont.deriveFont(11.0f));
 		publicVideoQualityDropDown.addItem("Niedrig");
 		publicVideoQualityDropDown.addItem("Mittel");
 		publicVideoQualityDropDown.addItem("Hoch");
 		publicVideoQualityDropDown.setEnabled(false);
 
-		publicVideoDurationDropDown = new JComboBox<String>();
+		publicVideoDurationDropDown = new JComboBox();
 		publicVideoDurationDropDown.setFont(standardFont.deriveFont(11.0f));
 		publicVideoDurationDropDown.addItem(contractSettings.getDuration(0));
 		publicVideoDurationDropDown.addItem(contractSettings.getDuration(1));
@@ -1377,7 +1377,7 @@ class Gui extends JFrame{
 		publicVideoDurationDropDown.addItem(contractSettings.getDuration(3));
 		publicVideoDurationDropDown.setEnabled(false);
 
-		migrationDropDown = new JComboBox<String>();
+		migrationDropDown = new JComboBox();
 		migrationDropDown.setFont(standardFont.deriveFont(11.0f));
 		migrationDropDown.addItem("Keine");
 		migrationDropDown.addItem("Über Migration informieren");
