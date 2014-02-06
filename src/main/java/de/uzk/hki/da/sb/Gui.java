@@ -1606,7 +1606,7 @@ class Gui extends JFrame{
 		createArea.setBounds(255, 100, 400, 110);
 		compressionCheckBox.setBounds(251, 220, 175, 20);
 		progressBar.setBounds(255, 260, 350, 20);
-		sipProgressDisplayLabel.setBounds(255, 285, 350, 20);
+		sipProgressDisplayLabel.setBounds(240, 285, 380, 20);
 		sipProgressStepLabel.setBounds(255, 310, 350, 20);
 		goBackToSaveButton.setBounds(450, 445, 90, 20);
 		createButton.setBounds(575, 445, 90, 20);
