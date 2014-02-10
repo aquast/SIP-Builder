@@ -58,6 +58,7 @@ import javax.swing.filechooser.FileFilter;
  * Displays the graphical user interface and reacts to user input
  * 
  * @author Thomas Kleinke
+ * @author Martin Fischer
  */
 class Gui extends JFrame{
 
@@ -3680,10 +3681,11 @@ class Gui extends JFrame{
 			}
 			if (publicRights.getAudioRestriction())
 				settingsOverview += "     Maximale Abspieldauer von Audiodateien: " + publicRights.getAudioDuration() + " Sekunden\n";
-			if (publicRights.getVideoRestriction()) {
+			if (publicRights.getVideoRestriction())
 				settingsOverview += "     Bildqualität von Videodateien: " + (String) publicVideoQualityDropDown.getSelectedItem() + "\n";
+			if (publicRights.getVideoDurationRestriction())	
 				settingsOverview += "     Maximale Abspieldauer von Videodateien: " + publicRights.getVideoDuration() + " Sekunden\n";
-			}
+			
 		} else
 			settingsOverview += "Nein\n";
 		
@@ -3712,11 +3714,10 @@ class Gui extends JFrame{
 			}
 			if (institutionRights.getAudioRestriction())
 				settingsOverview += "     Maximale Abspieldauer von Audiodateien: " + institutionRights.getAudioDuration() + " Sekunden\n";
-			if (institutionRights.getVideoRestriction()) {
+			if (institutionRights.getVideoRestriction())
 				settingsOverview += "     Bildqualität von Videodateien: " + (String) institutionVideoQualityDropDown.getSelectedItem() + "\n";
-
+			if (institutionRights.getVideoDurationRestriction())	
 				settingsOverview += "     Maximale Abspieldauer von Videodateien: " + institutionRights.getVideoDuration() + " Sekunden\n";
-			}
 		} else
 			settingsOverview += "Nein\n";
 		
