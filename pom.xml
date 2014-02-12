@@ -5,6 +5,8 @@
 		<scp.user>irods</scp.user>
 		<scp.host>da-nrw.hki.uni-koeln.de</scp.host>
 		<scp.toDir>/data/danrw/www/ssl/htdocs/sipbuilder/</scp.toDir>
+		<maven.test.search.classdir>true</maven.test.search.classdir>
+    	<include.tests>**/*DDDCDDSD*.java</include.tests>
 	</properties>
 	
 	<modelVersion>4.0.0</modelVersion>
@@ -40,7 +42,19 @@
 	
 	<build>
 		<plugins>
-		
+		<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<version>2.13</version>
+				<configuration>
+					<includes>
+						<include>%regex[.*Simple.*Suite.*]</include>
+						<include>${include.tests}</include>
+					</includes>
+	    			<argLine>-Dfile.encoding=UTF-8</argLine> 
+				</configuration>
+				
+			</plugin>
 		<plugin>
 				<artifactId>maven-compiler-plugin</artifactId>
 				<configuration>
@@ -133,6 +147,12 @@
 			<groupId>commons-lang</groupId>
 			<artifactId>commons-lang</artifactId>
 			<version>2.6</version>
+		</dependency>
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>4.9</version>
+			<scope>test</scope>
 		</dependency>
 	</dependencies>
 	
