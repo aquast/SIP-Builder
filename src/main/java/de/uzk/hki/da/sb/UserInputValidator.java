@@ -51,7 +51,8 @@ class UserInputValidator {
 	
 	
 	/**
-	 * Checks if the pathes chosen by the user exist and its contents are compliant with the chosen kind of SIP building
+	 * Checks if the paths chosen by the user exist and the folder contents are compliant
+	 * with the chosen kind of SIP building
 	 * 
 	 * @param sourcePath The source path
 	 * @param destinationPath The destination path
