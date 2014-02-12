@@ -56,7 +56,7 @@ class ContractSettings {
 		File settingsFile = new File(confFolderPath + File.separator + "settings.xml");
 		
 		if (settingsFile.exists())
-			loadSettingsFile(settingsFile);
+			loadContractSettingsFromFile(settingsFile);
 		else
 			setStandardSettings();
 	}
@@ -71,7 +71,7 @@ class ContractSettings {
 	 * @throws NullPointerException
 	 * @throws SAXException
 	 */
-	private void loadSettingsFile(File settingsFile) throws IOException, ValidityException,
+	private void loadContractSettingsFromFile(File settingsFile) throws IOException, ValidityException,
 		ParsingException, NullPointerException, SAXException {
 		
 		XMLReader xmlReader = null;

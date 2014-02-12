@@ -1,6 +1,6 @@
 /*
-  DA-NRW Software Suite | ContentBroker
-  Copyright (C) 2013 Historisch-Kulturwissenschaftliche Informationsverarbeitung
+  DA-NRW Software Suite | SIP-Builder
+  Copyright (C) 2014 Historisch-Kulturwissenschaftliche Informationsverarbeitung
   Universität zu Köln
 
   This program is free software: you can redistribute it and/or modify
@@ -28,7 +28,8 @@ import org.junit.runners.Suite.SuiteClasses;
  */
 @RunWith(Suite.class)
 @SuiteClasses({
-	ContractRightsTests.class
+	ContractRightsTests.class,
+	ContractSettingsTests.class
 })
 public class SimpleSuite {
 
