@@ -5,8 +5,10 @@ package de.uzk.hki.da.sb.restfulService;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.Enumeration;
 import java.util.Properties;
 
+import org.apache.log4j.Logger;
 
 /**
  * Class SipBuilderParam
@@ -20,8 +22,11 @@ import java.util.Properties;
  */
 public class SipBuilderParam {
 
-
-	private Properties bProp = null;
+	// Initiate Logger for TimePrefix
+	private static Logger log = Logger.getLogger(SipBuilderParam.class);
+	
+	private static Properties bProp = null;
+	
 	/**
 	 * 
 	 */
@@ -35,10 +40,10 @@ public class SipBuilderParam {
 	 * <p>Description: load default Properties from properties.file</p>
 	 *  
 	 */
-	private void loadDefaultProp(){
+	private static void loadDefaultProp(){
 		bProp = new Properties();
 		
-		InputStream paramStream =  this.getClass().getResourceAsStream("conf/defaultParam.properties");
+		InputStream paramStream =  bProp.getClass().getResourceAsStream("conf/defaultParam.properties");
 		try {
 			bProp.load(paramStream);
 		} catch (IOException e) {
@@ -48,7 +53,7 @@ public class SipBuilderParam {
 		} 
 	}
 	
-	private void createDefaultProperties(){
+	private static void createDefaultProperties(){
 		
 		// set accessing Params makes no sense to set them here!
 		bProp.setProperty("source", "http://localhost/sip"); // url to the directory containing content
@@ -65,7 +70,35 @@ public class SipBuilderParam {
 		bProp.setProperty("ignoreFileExtension", "html;rtf;doc;odt"); // files that shuold not be part of sip
 	}
 
+	public static Properties getDefaultProperties(){
+		loadDefaultProp();
+		return bProp;
+	}
+	
+	public void setProperties(Properties prop){
+		bProp = prop;
+	}
+	
+	public Properties getProperties(){
+		return bProp;
+	}
 
+	public void setProperty(String key, String value){
+		bProp.setProperty(key, value);
+	}
+	
+	public String getProperty(String key){
+		return bProp.getProperty(key);
+	}
 
-
+	public String setParameterString(Properties prop){
+		String paramString = null;
+		Enumeration key = prop.keys();
+		
+		while(key.hasMoreElements()){
+			
+		}
+		return paramString;
+		
+	}
 }

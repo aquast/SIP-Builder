@@ -1,5 +1,5 @@
 /**
- * SipBuilderResult.java - This file is part of the DiPP Project by hbz
+ * TimePrefix.java - This file is part of the DiPP Project by hbz
  * Library Service Center North Rhine Westfalia, Cologne 
  *
  * -----------------------------------------------------------------------------
@@ -22,35 +22,40 @@
  */
 package de.uzk.hki.da.sb.restfulService;
 
-import javax.xml.bind.annotation.XmlRootElement;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+
+import org.apache.log4j.Logger;
 
 /**
- * Class SipBuilderResult
+ * Class TimePrefix
  * 
- * <p><em>Title: </em></p>
- * <p>Description: </p>
+ * <p><em>Title: Time Stamp for directories or Files </em></p>
+ * <p>Description: Class returns the actual time stamp which can be used for 
+ * creation of unique directory and file names</p>
  * 
  * @author aquast, email
- * creation date: 13.02.2014
+ * creation date: 29.07.2013
  *
  */
-@XmlRootElement
-public class SipBuilderResult {
+public class TimePrefix {
 
-	
-	private String inputFileUrl = null;
-	private String resultFileUrl = null;
-	private int exitStateInt = 0;
-	private String exitState = null;
+	// Initiate Logger for TimePrefix
+	private static Logger log = Logger.getLogger(TimePrefix.class);
 
-	
-	
 	/**
+	 * <p><em>Title: </em></p>
+	 * <p>Description: simple Method that returns a time stamp used to 
+	 * create unique identifiers</p>
 	 * 
+	 * @return 
 	 */
-	public SipBuilderResult() {
-		// TODO Auto-generated constructor stub
+	public static String getTimePrefix(){
+		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMdd'T'kkmmssSSS'Z'");
+		Calendar cal = Calendar.getInstance();
+		log.debug(dateFormat.format(cal.getTime()));
+		return dateFormat.format(cal.getTime());
 	}
-	
-	
+		
+
 }
