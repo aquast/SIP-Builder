@@ -19,17 +19,23 @@
 
 package de.uzk.hki.da.sb;
 
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.io.Reader;
 import java.io.Writer;
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
 import org.apache.commons.io.FileUtils;
 
+import de.nrw.dipp.dippCore.util.Constant;
 import de.uzk.hki.da.sb.ContractRights.ConversionCondition;
 import de.uzk.hki.da.sb.PublicationRights.Law;
 import de.uzk.hki.da.sb.PublicationRights.TextType;
@@ -271,4 +277,6 @@ class Utilities {
 	public static String getSipBuilderVersion() {
 		return sipBuilderVersion;
 	}
+	
+
 }

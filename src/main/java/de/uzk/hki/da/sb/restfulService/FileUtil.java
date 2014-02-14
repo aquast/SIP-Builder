@@ -27,6 +27,8 @@ import org.apache.commons.codec.binary.Base64;
 
 import java.io.*;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 
 
 /**
@@ -347,6 +349,44 @@ public class FileUtil {
 
 		}
 		
+	}
+
+	/**
+	 * Get Textfile Content as List of String[]
+	 * generic method to read blank space separated values 
+	 * 
+	 * @param fileName
+	 * @return
+	 * @throws IOException 
+	 */
+	public static ArrayList<String[]> readFromFile(String fileName) throws IOException{
+		ArrayList<String[]> items = new ArrayList<String[]>();
+		try {
+			BufferedReader reader = new BufferedReader(new InputStreamReader(new FileInputStream(fileName)));
+			String itemUrl = "";
+			String line = null;
+			while ( (line = reader.readLine()) != null){
+				if(!line.startsWith("#")){	// make comments possible
+					//remove comments from line
+					line = line.substring(0,line.indexOf("#"));
+					
+					String[] item = line.split("\\s");  // split line by blank space
+					items.add(item);
+				}
+			}
+			reader.close();
+		}
+		catch (IOException e) {
+			log.error(e);
+		}
+		return items;
+	}
+	
+	public static String getRemoteFileName(String url){
+		URL rUrl = new URL(url);
+		String rFilePath = rUrl.getPath();
+		String rFileName = rUrl.getPath().substring(rFilePath.lastIndexOf("/"));
+		return rFileName;
 	}
 
 }

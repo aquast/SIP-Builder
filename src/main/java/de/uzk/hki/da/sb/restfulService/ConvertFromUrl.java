@@ -37,35 +37,42 @@ public class ConvertFromUrl {
 	// Initiate Logger for class
 	private static Logger log = Logger.getLogger(ConvertFromUrl.class);
 
+	private  String fileIdent = null;
 	
 	@POST
 	@Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
-	public SipBuilderResult postConvertFromUrl(@QueryParam("inputFile") String inputFileUrl, 
+	public SipBuilderResult postConvertFromUrl(@QueryParam("fileList") String fileListUrl, 
 			@QueryParam("parameterFile") String paramFileUrl){
 		SipBuilderResult response = null;
 
-		String fileIdent = TimePrefix.getTimePrefix();
-		Properties builderProp = SipBuilderParam.getDefaultProperties();
+		// copy parameter file to server
+		fileIdent = TimePrefix.getTimePrefix();
 		String paramFileName = FileUtil.saveUrlToFile(fileIdent + "_param.txt", paramFileUrl);
 
-		Properties paramProp = SipBuilderParam.getDefaultProperties();
+		// copy filelist file to server
+		String fileListName = FileUtil.saveUrlToFile(fileIdent + "_filelist.txt", fileListUrl);
+
+		// get default properties
+		Properties builderProp = SipBuilderParam.getDefaultProperties();
 		
+		// now try to read in Properties from ParamFile
         try {
     		log.info("Reading Parameters File");
             FileInputStream fis;
 			fis = new FileInputStream(new File(Configuration.getTempDirPath() + paramFileName));
 	        BufferedInputStream bis = new BufferedInputStream(fis);
-			paramProp.load(bis);
+			builderProp.load(bis);
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			log.warn("Parameter file could not be loaded, using default parameter");
+			//e.printStackTrace();
 		}
 		
-		response = convertFromUrl(builderProp, inputFileUrl);
+		response = convertFromUrl(builderProp, fileListName);
 		
 		return response;
 	}
 
+	/*
 	@Path("/autoConf")
 	@POST
 	@Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
@@ -99,24 +106,37 @@ public class ConvertFromUrl {
 			
 		return response;
 	}
-
+*/
 	
 	
-	public SipBuilderResult convertFromUrl(Properties paramProp, String inputFileUrl){
+	public SipBuilderResult convertFromUrl(Properties paramProp, String fileList){
 		
 		
-		SipBuilderResult builderResult = new SipBuilderResult();
-		
-		//create a unique temporary file prefix 
-		String fileIdent = TimePrefix.getTimePrefix() + ".pdf";
+		SipBuilderResult builderResult = null;
 		
 		// copy remote Object to temporary Directory
-		String fileName = FileUtil.saveUrlToFile(fileIdent, inputFileUrl);
+		ArrayList<String[]> remoteAssemblage = FileUtil.readFromFile(fileList);
+		ArrayList<String> localAssemblage = new ArrayList<String>();
+		
+		Iterator<String[]> aIt =  remoteAssemblage.iterator();
+		while(aIt.hasNext()){
+			String remoteUrl = aIt.next()[0]; 
+			String fileName = new String();
+			
+			if(remoteUrl.startsWith("http")){
+				fileName = FileUtil.saveUrlToFile(fileIdent + FileUtil.getRemoteFileName(remoteUrl), remoteUrl);
+			}else{
+				log.warn("Url: " + remoteUrl + " is usable for this functionality\n"
+						+ "please proidve an HTTP-Url");
+			}
+			localAssemblage.add(fileName);
+		}
+		
 		
 		//executeString = "cp " + Configuration.getTempfiledir() + fileName + " " + Configuration.getTempfiledir() + "result_" + fileName;
 		
 		SipBuilderRunner sbRunner = new SipBuilderRunner();
-		sbRunner.executePdfATool(paramString, fileName);
+		sbRunner.execute(paramString, fileName);
 
 		builderResult.setInputFileUrl(inputFileUrl);
 
@@ -133,7 +153,7 @@ public class ConvertFromUrl {
 
 		builderResult.setExitState(sbRunner.getExitStateStr());
 		
-		if(sbRunner.getExitStateStr() != null && sbRunner.getExitStateStr().equals("0")){
+		if(sbRunner.getExitState() != null && sbRunner.getExitState().equals("0")){
 			pResultsetResultFileUrl(Configuration.getResultDirUrl() + fileName);
 		}
 		return builderResult;
