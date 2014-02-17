@@ -26,6 +26,7 @@ import org.apache.log4j.Logger;
 import org.apache.commons.codec.binary.Base64;
 
 import java.io.*;
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
@@ -383,7 +384,13 @@ public class FileUtil {
 	}
 	
 	public static String getRemoteFileName(String url){
-		URL rUrl = new URL(url);
+		URL rUrl = null;;
+		try {
+			rUrl = new URL(url);
+		} catch (MalformedURLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		String rFilePath = rUrl.getPath();
 		String rFileName = rUrl.getPath().substring(rFilePath.lastIndexOf("/"));
 		return rFileName;

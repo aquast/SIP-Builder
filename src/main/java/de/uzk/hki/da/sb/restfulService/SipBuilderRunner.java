@@ -5,6 +5,9 @@ package de.uzk.hki.da.sb.restfulService;
 
 import de.uzk.hki.da.sb.SIPFactory;
 
+import java.util.ArrayList;
+import java.util.Properties;
+
 /**
  * @author aquast
  *
@@ -12,6 +15,7 @@ import de.uzk.hki.da.sb.SIPFactory;
 public class SipBuilderRunner {
 
 	private SIPFactory sip = new SIPFactory();
+	private String exitState = null;
 
 	/**
 	 * 
@@ -33,4 +37,14 @@ public class SipBuilderRunner {
 		return sipC;
 	}
 	
+	public String getExitState() {
+		// TODO Auto-generated method stub
+		return exitState;
+	}
+
+	public void execute(Properties paramProp, ArrayList<String> localAssemblage){
+		// TODO Auto-generated method stub
+		
+	}
+
 }
