@@ -1,0 +1,7 @@
+# File to test FileUtil method readFromFile
+
+https://www.q-terra.de
+https://www.q-terra.de test
+https://www.q-terra.de	test
+test http://www.q-terra.de
+test	http://huhu

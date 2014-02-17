@@ -24,12 +24,6 @@ public class SipBuilderRunner {
 		// TODO Auto-generated constructor stub
 	}
 
-	public void executeSipBuilder(){
-
-		sip = configureSip(); 
-
-	}
-
 	private SIPFactory configureSip(){
 		SIPFactory sipC = new SIPFactory();
 		
@@ -43,7 +37,9 @@ public class SipBuilderRunner {
 	}
 
 	public void execute(Properties paramProp, ArrayList<String> localAssemblage){
+		
 		// TODO Auto-generated method stub
+		sip = configureSip(); 
 		
 	}
 
