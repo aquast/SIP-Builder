@@ -6,7 +6,6 @@ package de.uzk.hki.da.sb.restfulService;
 import java.util.ArrayList;
 import java.util.List;
 
-import de.uzk.hki.da.sb.CliProgressManager;
 import de.uzk.hki.da.sb.SIPFactory;
 
 /**
@@ -65,7 +64,7 @@ public class ParamMapper {
 			String[] ignoreExt = sbParam.getProperty("ignoreFileExtension").split(";");
 			ArrayList<String> ignoreList = new ArrayList<String>();
 			
-			sipFactory.setForbiddenFileExtensions((sbParam.getProperty("ignoreFileExtension"));
+			//sipFactory.setForbiddenFileExtensions((sbParam.getProperty("ignoreFileExtension"));
 		}
 
 		return sipFactory;
