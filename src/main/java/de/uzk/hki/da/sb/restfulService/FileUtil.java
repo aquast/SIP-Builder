@@ -367,9 +367,11 @@ public class FileUtil {
 			String itemUrl = "";
 			String line = null;
 			while ( (line = reader.readLine()) != null){
-				if(!line.startsWith("#")){	// make comments possible
+				if(!line.startsWith("#") && !line.isEmpty()){	// make comments possible
 					//remove comments from line
-					line = line.substring(0,line.indexOf("#"));
+					if (line.contains("#")){
+						line = line.substring(0,line.indexOf("#"));
+					}
 					
 					String[] item = line.split("\\s");  // split line by blank space
 					items.add(item);
@@ -383,6 +385,13 @@ public class FileUtil {
 		return items;
 	}
 	
+	/**
+	 * <p><em>Title: </em></p>
+	 * <p>Description: Method to strip file name from url</p>
+	 * 
+	 * @param url
+	 * @return 
+	 */
 	public static String getRemoteFileName(String url){
 		URL rUrl = null;;
 		try {

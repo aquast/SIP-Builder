@@ -1,7 +1,6 @@
 # File to test FileUtil method readFromFile
-
-https://www.q-terra.de
+https://www.q-terra.de erste zeile	fieselschweif
 https://www.q-terra.de test
 https://www.q-terra.de	test
 test http://www.q-terra.de
-test	http://huhu
+test	http://huhu bla	#Hier steh ein Kommentar
