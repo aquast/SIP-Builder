@@ -3,12 +3,9 @@
  */
 package de.uzk.hki.da.sb.restfulService;
 
-import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
-
-import javax.servlet.ServletException;
 
 import org.apache.log4j.BasicConfigurator;
 import org.apache.log4j.Logger;

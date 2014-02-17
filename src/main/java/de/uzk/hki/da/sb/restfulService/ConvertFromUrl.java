@@ -115,7 +115,13 @@ public class ConvertFromUrl {
 		SipBuilderResult builderResult = null;
 		
 		// copy remote Object to temporary Directory
-		ArrayList<String[]> remoteAssemblage = FileUtil.readFromFile(fileList);
+		ArrayList<String[]> remoteAssemblage = null;
+		try {
+			remoteAssemblage = FileUtil.readFromFile(fileList);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		ArrayList<String> localAssemblage = new ArrayList<String>();
 		
 		Iterator<String[]> aIt =  remoteAssemblage.iterator();
@@ -136,8 +142,9 @@ public class ConvertFromUrl {
 		//executeString = "cp " + Configuration.getTempfiledir() + fileName + " " + Configuration.getTempfiledir() + "result_" + fileName;
 		
 		SipBuilderRunner sbRunner = new SipBuilderRunner();
-		sbRunner.execute(paramString, fileName);
+		sbRunner.execute(paramProp, localAssemblage);
 
+		/*
 		builderResult.setInputFileUrl(inputFileUrl);
 
 		String reportFile = Configuration.getResultDirPath() + fileName.replace(".pdf", "." + paramType.getReportFormat()[0].getValue().toLowerCase());
@@ -151,14 +158,12 @@ public class ConvertFromUrl {
 		}
 		
 
-		builderResult.setExitState(sbRunner.getExitStateStr());
-		
 		if(sbRunner.getExitState() != null && sbRunner.getExitState().equals("0")){
 			pResultsetResultFileUrl(Configuration.getResultDirUrl() + fileName);
-		}
+		}*/
 		return builderResult;
 
 		
-	}*/
+	}
 	
 }

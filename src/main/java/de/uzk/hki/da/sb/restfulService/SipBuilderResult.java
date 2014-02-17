@@ -51,6 +51,13 @@ public class SipBuilderResult {
 	public SipBuilderResult() {
 		// TODO Auto-generated constructor stub
 	}
+
+
+
+	public void setReportFileUrl(String string) {
+		// TODO Auto-generated method stub
+		
+	}
 	
 	
 }

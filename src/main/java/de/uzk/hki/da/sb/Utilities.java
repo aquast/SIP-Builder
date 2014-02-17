@@ -35,7 +35,6 @@ import java.util.List;
 
 import org.apache.commons.io.FileUtils;
 
-import de.nrw.dipp.dippCore.util.Constant;
 import de.uzk.hki.da.sb.ContractRights.ConversionCondition;
 import de.uzk.hki.da.sb.PublicationRights.Law;
 import de.uzk.hki.da.sb.PublicationRights.TextType;
