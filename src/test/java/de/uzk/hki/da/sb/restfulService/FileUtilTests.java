@@ -65,7 +65,7 @@ public class FileUtilTests {
 	@Test public void copyRemoteToServer(){
 		String fileIdent = "time_prefix";
 		String remoteUrl = "http://www.zeitenblicke.de/2009/2/wunder/dippArticle.pdf";
-		remoteUrl = "http://localhost/duckHouse.pdf";
+		//remoteUrl = "http://localhost/duckHouse.pdf";
 		FileUtil.saveUrlToFile(fileIdent + "/source/" + FileUtil.getRemoteFileName(remoteUrl), remoteUrl);
 	}
 	

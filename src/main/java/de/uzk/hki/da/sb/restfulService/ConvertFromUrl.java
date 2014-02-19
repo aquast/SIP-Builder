@@ -3,18 +3,13 @@
  */
 package de.uzk.hki.da.sb.restfulService;
 
-import  de.uzk.hki.da.sb.*;
 
 import java.io.BufferedInputStream;
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.io.InputStream;
-import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.Iterator;
-import java.util.List;
 import java.util.Properties;
 
 import javax.ws.rs.GET;
@@ -31,14 +26,15 @@ import org.apache.log4j.Logger;
  * @author Andres Quast
  *
  */
-@Path("/api/convertFromUrl")
+@Path("/api")
 public class ConvertFromUrl {
 
 	// Initiate Logger for class
 	private static Logger log = Logger.getLogger(ConvertFromUrl.class);
 
 	private  String fileIdent = null;
-	
+
+	@Path("/convertFromUrl")
 	@POST
 	@Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
 	public SipBuilderResult postConvertFromUrl(@QueryParam("fileList") String fileListUrl, 
@@ -50,26 +46,12 @@ public class ConvertFromUrl {
 		fileIdent = TimePrefix.getTimePrefix();
 		String paramFileName = FileUtil.saveUrlToFile(fileIdent + "/param.txt", paramFileUrl);
 
+		// read in parameters from file
+		Properties builderProp = readProperties(paramFileName);
+
 		// copy filelist file to server
 		String fileListName = FileUtil.saveUrlToFile(fileIdent + "/filelist.txt", fileListUrl);
-		
-		
-		// get default properties
-		Properties builderProp = SipBuilderParam.getDefaultProperties();
-		// set actual local paths
-		builderProp.setProperty("source", Configuration.getTempDirPath() + "/" + fileIdent + "/source/" );
-		builderProp.setProperty("destination", Configuration.getTempDirPath() + "/" + fileIdent + "/result/" );
-		// now try to read in Properties from ParamFile
-        try {
-    		log.info("Reading Parameters File");
-            FileInputStream fis;
-			fis = new FileInputStream(new File(Configuration.getTempDirPath() + paramFileName));
-	        BufferedInputStream bis = new BufferedInputStream(fis);
-			builderProp.load(bis);
-		} catch (Exception e) {
-			log.warn("Parameter file could not be loaded, using default parameter");
-			//e.printStackTrace();
-		}
+
 		
 		response = convertFromUrl(builderProp, fileListName);
 		
@@ -112,8 +94,31 @@ public class ConvertFromUrl {
 	}
 */
 	
+	private Properties readProperties(String fileName){
+		
+		// first get default properties
+		Properties builderProp = SipBuilderParam.getDefaultProperties();
+		
+		// set actual local paths
+		builderProp.setProperty("source", Configuration.getTempDirPath() + "/" + fileIdent + "/source/" );
+		builderProp.setProperty("destination", Configuration.getTempDirPath() + "/" + fileIdent + "/result/" );
+		// now try to read in Properties from ParamFile
+        try {
+    		log.info("Reading Parameters File");
+            FileInputStream fis;
+			fis = new FileInputStream(new File(Configuration.getTempDirPath() + fileName));
+	        BufferedInputStream bis = new BufferedInputStream(fis);
+			builderProp.load(bis);
+		} catch (Exception e) {
+			log.warn("Parameter file could not be loaded, using default parameter");
+			//e.printStackTrace();
+		}
+		return builderProp;
+		
+	}
 	
-	public SipBuilderResult convertFromUrl(Properties paramProp, String fileList){
+	
+	private SipBuilderResult convertFromUrl(Properties paramProp, String fileList){
 		
 		
 		SipBuilderResult builderResult = null;

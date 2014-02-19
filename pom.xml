@@ -119,6 +119,22 @@
 					</dependency>
 				</dependencies>
 			</plugin>
+			  		<plugin>
+  			<groupId>org.apache.maven.plugins</groupId>
+  			<artifactId>maven-war-plugin</artifactId>
+  			<version>2.3</version>
+  			<configuration>
+				<webXml>src/main/resources/WEB-INF/web.xml</webXml>
+				<packagingExcludes>WEB-INF/lib/servlet-api-2.3.jar</packagingExcludes>				
+				<warName>hkiSB</warName>
+			</configuration>
+  			<executions>
+  				<execution>
+  					<id>war</id>
+  				</execution>
+  			</executions> 
+  		</plugin>
+			
 		</plugins>
 	</build>
 
@@ -158,6 +174,16 @@
 			<groupId>com.sun.jersey</groupId>
 			<artifactId>jersey-bundle</artifactId>
 			<version>1.18</version>
+		</dependency>
+		<dependency>
+			<groupId>log4j</groupId>
+			<artifactId>log4j</artifactId>
+			<version>1.2.14</version>
+		</dependency>
+		<dependency>
+			<groupId>asm</groupId>
+			<artifactId>asm</artifactId>
+			<version>3.3</version>
 		</dependency>
 	</dependencies>
 	

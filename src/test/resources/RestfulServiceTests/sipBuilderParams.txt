@@ -1,0 +1,4 @@
+#set processing Params
+modOverwrite = always		
+ignoreFileExtension = rtf;doc;odt
+ignoreZeroByteFiles = true
