@@ -24,9 +24,9 @@ public class SipBuilderRunner {
 		// TODO Auto-generated constructor stub
 	}
 
-	private SIPFactory configureSip(){
+	private SIPFactory configureSip(SipBuilderParam sbParam){
 		SIPFactory sipC = new SIPFactory();
-		
+		ParamMapper.setParam(sbParam, sipC);
 		
 		return sipC;
 	}
@@ -36,11 +36,14 @@ public class SipBuilderRunner {
 		return exitState;
 	}
 
-	public void execute(Properties paramProp, ArrayList<String> localAssemblage){
+	public void execute(Properties paramProp){
 		
-		// TODO Auto-generated method stub
-		sip = configureSip(); 
+		SipBuilderParam sbParam = new SipBuilderParam();
+		sbParam.setProperties(paramProp);
 		
+		sip = configureSip(sbParam); 
+		
+		sip.startSIPBuilding();
 	}
 
 }

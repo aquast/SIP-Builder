@@ -29,7 +29,7 @@ public class ParamMapper {
 	 * @param sipFactory
 	 * @return 
 	 */
-	public SIPFactory setParam(SipBuilderParam  sbParam, SIPFactory sipFactory){
+	public static SIPFactory setParam(SipBuilderParam  sbParam, SIPFactory sipFactory){
 		
 		// first set default Params
     	sipFactory.setKindofSIPBuilding(SIPFactory.KindOfSIPBuilding.MULTIPLE_FOLDERS);
@@ -41,30 +41,36 @@ public class ParamMapper {
     	sipFactory.setSourcePath(sbParam.getProperty("source"));
 		sipFactory.setDestinationPath(sbParam.getProperty("destination"));
 		
+		// TODO clarify if this code block is required for Restful Services:
 		if(sbParam.getProperties().containsKey("modSingleOrMultiple") 
 				&& sbParam.getProperty("modSingleOrMultiple").equals("multiple")){
 	    	sipFactory.setKindofSIPBuilding(SIPFactory.KindOfSIPBuilding.MULTIPLE_FOLDERS);			
 		}
-
 		if(sbParam.getProperties().containsKey("modSingleOrMultiple") 
 				&& sbParam.getProperty("modSingleOrMultiple").equals("single")){
 	    	sipFactory.setKindofSIPBuilding(SIPFactory.KindOfSIPBuilding.SINGLE_FOLDER);
 	    	
 		}
 
+		// Set modSingleOrMultiple according the kind of Restful Service
 		if(sbParam.getProperties().containsKey("filelist")){
 			sipFactory.setKindofSIPBuilding(sbParam.getProperty("filelist"));
+			sipFactory.setKindofSIPBuilding(SIPFactory.KindOfSIPBuilding.SINGLE_FOLDER);
+	    	
 		}
 
 		if(sbParam.getProperties().containsKey("siplist")){
 			sipFactory.setKindofSIPBuilding(sbParam.getProperty("siplist"));
+			sipFactory.setKindofSIPBuilding(SIPFactory.KindOfSIPBuilding.MULTIPLE_FOLDERS);
 		}
 
 		if(sbParam.getProperties().containsKey("ignoreFileExtension")){
 			String[] ignoreExt = sbParam.getProperty("ignoreFileExtension").split(";");
 			ArrayList<String> ignoreList = new ArrayList<String>();
-			
-			//sipFactory.setForbiddenFileExtensions((sbParam.getProperty("ignoreFileExtension"));
+			for(int i = 0; i < ignoreExt.length; i++){
+				ignoreList.add(ignoreExt[i]);
+			}
+			sipFactory.setForbiddenFileExtensions(ignoreList);
 		}
 
 		return sipFactory;

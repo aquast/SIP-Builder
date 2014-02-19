@@ -84,9 +84,9 @@ public class Configuration {
 	public static void loadConfigurationFile(){
         sysProp = new Properties(defProp);
         try {
-            InputStream propStream = new Configuration().getClass().getResourceAsStream("/conf/sipBuildService.cfg");
+            InputStream propStream = new Configuration().getClass().getResourceAsStream("/conf/sipBuilderService.cfg");
             if (propStream == null) {
-                throw new IOException("Error loading configuration: /conf/sipBuildService.cfg not found in classpath");
+                throw new IOException("Error loading configuration: /conf/sipBuilderService.cfg not found in classpath");
             }else{
                 sysProp.load(propStream);
             }

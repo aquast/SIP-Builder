@@ -241,6 +241,12 @@ public class FileUtil {
 	 * @return 
 	 */
 	public static String saveUrlToFile(String fileName, String url){
+		
+		
+		String path = fileName.substring(0, fileName.lastIndexOf("/"));
+		File dir = new File(Configuration.getTempDirPath() +"/" +path);
+				dir.mkdirs();
+				
 		File inputFile = new File(Configuration.getTempDirPath() +"/" + fileName);
 		log.debug(inputFile.getAbsolutePath());
 		InputStream is = null;

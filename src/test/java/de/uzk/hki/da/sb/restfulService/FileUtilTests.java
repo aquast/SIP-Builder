@@ -33,7 +33,7 @@ public class FileUtilTests {
 		
 		InputStream testFile = getClass().getResourceAsStream("/RestfulServiceTests/InListFile.txt");
 		
-		System.out.println("Stream: " + testFile.toString());
+		log.debug("Stream: " + testFile.toString());
 		
 		String filePath = System.getProperty("user.dir") + "/src/test/resources/RestfulServiceTests/InListFile.txt";
 		
@@ -62,13 +62,20 @@ public class FileUtilTests {
 		}
 	}
 	
+	@Test public void copyRemoteToServer(){
+		String fileIdent = "time_prefix";
+		String remoteUrl = "http://www.zeitenblicke.de/2009/2/wunder/dippArticle.pdf";
+		remoteUrl = "http://localhost/duckHouse.pdf";
+		FileUtil.saveUrlToFile(fileIdent + "/source/" + FileUtil.getRemoteFileName(remoteUrl), remoteUrl);
+	}
+	
 	/**
 	 * @param args
 	 */
 	public static void main(String[] args) {
 		FileUtilTests fuTest = new FileUtilTests();
-		fuTest.convertFileList();
-
+		//fuTest.convertFileList();
+		fuTest.copyRemoteToServer();
 	}
 
 }

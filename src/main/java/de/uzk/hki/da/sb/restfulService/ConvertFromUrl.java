@@ -42,19 +42,23 @@ public class ConvertFromUrl {
 	@POST
 	@Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
 	public SipBuilderResult postConvertFromUrl(@QueryParam("fileList") String fileListUrl, 
-			@QueryParam("parameterFile") String paramFileUrl){
+			@QueryParam("parameterFile") String paramFileUrl,
+			@QueryParam("rigths") String rightsFileUrl){
 		SipBuilderResult response = null;
 
 		// copy parameter file to server
 		fileIdent = TimePrefix.getTimePrefix();
-		String paramFileName = FileUtil.saveUrlToFile(fileIdent + "_param.txt", paramFileUrl);
+		String paramFileName = FileUtil.saveUrlToFile(fileIdent + "/param.txt", paramFileUrl);
 
 		// copy filelist file to server
-		String fileListName = FileUtil.saveUrlToFile(fileIdent + "_filelist.txt", fileListUrl);
-
+		String fileListName = FileUtil.saveUrlToFile(fileIdent + "/filelist.txt", fileListUrl);
+		
+		
 		// get default properties
 		Properties builderProp = SipBuilderParam.getDefaultProperties();
-		
+		// set actual local paths
+		builderProp.setProperty("source", Configuration.getTempDirPath() + "/" + fileIdent + "/source/" );
+		builderProp.setProperty("destination", Configuration.getTempDirPath() + "/" + fileIdent + "/result/" );
 		// now try to read in Properties from ParamFile
         try {
     		log.info("Reading Parameters File");
@@ -130,19 +134,20 @@ public class ConvertFromUrl {
 			String fileName = new String();
 			
 			if(remoteUrl.startsWith("http")){
-				fileName = FileUtil.saveUrlToFile(fileIdent + FileUtil.getRemoteFileName(remoteUrl), remoteUrl);
+				fileName = FileUtil.saveUrlToFile(fileIdent + "/source/" + FileUtil.getRemoteFileName(remoteUrl), remoteUrl);
 			}else{
 				log.warn("Url: " + remoteUrl + " is usable for this functionality\n"
-						+ "please proidve an HTTP-Url");
+						+ "please provide an HTTP-Url");
 			}
 			localAssemblage.add(fileName);
+			
 		}
 		
 		
 		//executeString = "cp " + Configuration.getTempfiledir() + fileName + " " + Configuration.getTempfiledir() + "result_" + fileName;
 		
 		SipBuilderRunner sbRunner = new SipBuilderRunner();
-		sbRunner.execute(paramProp, localAssemblage);
+		sbRunner.execute(paramProp);
 
 		/*
 		builderResult.setInputFileUrl(inputFileUrl);
