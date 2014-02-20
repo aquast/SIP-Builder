@@ -3,9 +3,10 @@
  */
 package de.uzk.hki.da.sb.restfulService;
 
+import de.uzk.hki.da.sb.RestMessageWriter;
+import de.uzk.hki.da.sb.RestProgressManager;
 import de.uzk.hki.da.sb.SIPFactory;
 
-import java.util.ArrayList;
 import java.util.Properties;
 
 /**
@@ -41,9 +42,14 @@ public class SipBuilderRunner {
 		SipBuilderParam sbParam = new SipBuilderParam();
 		sbParam.setProperties(paramProp);
 		
-		sip = configureSip(sbParam); 
+		RestProgressManager progressManager = new RestProgressManager(); 
+		sip = configureSip(sbParam);
+		RestMessageWriter rMessageWriter = new RestMessageWriter();
+		sip.setMessageWriter(rMessageWriter);
+		sip.setProgressManager(progressManager);
 		
 		sip.startSIPBuilding();
+		
 	}
 
 }

@@ -248,7 +248,6 @@ public class FileUtil {
 				dir.mkdirs();
 				
 		File inputFile = new File(Configuration.getTempDirPath() +"/" + fileName);
-		log.debug(inputFile.getAbsolutePath());
 		InputStream is = null;
 		BufferedInputStream bis = null;
 		BufferedOutputStream bos = null;
@@ -299,7 +298,9 @@ public class FileUtil {
 				}
 			}
 		}
-		return inputFile.getName();
+		
+		
+		return inputFile.getAbsolutePath();
 	}
 	
 	/**

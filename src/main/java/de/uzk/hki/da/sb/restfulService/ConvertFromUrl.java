@@ -45,6 +45,7 @@ public class ConvertFromUrl {
 		// copy parameter file to server
 		fileIdent = TimePrefix.getTimePrefix();
 		String paramFileName = FileUtil.saveUrlToFile(fileIdent + "/param.txt", paramFileUrl);
+		log.info(paramFileName);
 
 		// read in parameters from file
 		Properties builderProp = readProperties(paramFileName);
@@ -58,41 +59,6 @@ public class ConvertFromUrl {
 		return response;
 	}
 
-	/*
-	@Path("/autoConf")
-	@POST
-	@Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
-	public SipBuilderResult postConvertFromUrl(@QueryParam("inputFile") String inputFileUrl){
-		SipBuilderResult response = null;
-
-		// first run
-		InputStream paramStream =  this.getClass().getResourceAsStream("/conf/defaultParam1.cfg");
-
-		if(paramStream == null){
-			log.error("Failed loading defaultParams: not found in classpath");
-		}
-		FileUtil.saveInputStreamToTempFile(paramStream, "defaultParam1.txt");
-
-		String jobIdent = TimePrefix.getTimePrefix();
-
-		Properties paramProp = SipBuilderParam.getDefaultProperties();
-		
-        try {
-    		log.info("Reading Parameters File");
-            FileInputStream fis;
-			fis = new FileInputStream(new File(Configuration.getTempDirPath() + "defaultParam1.txt"));
-	        BufferedInputStream bis = new BufferedInputStream(fis);
-			paramProp.load(bis);
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-		response = convertFromUrl(paramProp, inputFileUrl);
-			
-		return response;
-	}
-*/
 	
 	private Properties readProperties(String fileName){
 		
@@ -104,10 +70,10 @@ public class ConvertFromUrl {
 		builderProp.setProperty("destination", Configuration.getTempDirPath() + "/" + fileIdent + "/result/" );
 		// now try to read in Properties from ParamFile
         try {
-    		log.info("Reading Parameters File");
-            FileInputStream fis;
-			fis = new FileInputStream(new File(Configuration.getTempDirPath() + fileName));
-	        BufferedInputStream bis = new BufferedInputStream(fis);
+    		log.info("Reading Parameters File: " + fileName);
+            FileInputStream fis = null;;
+			fis = new FileInputStream(new File(fileName));
+			BufferedInputStream bis = new BufferedInputStream(fis);
 			builderProp.load(bis);
 		} catch (Exception e) {
 			log.warn("Parameter file could not be loaded, using default parameter");

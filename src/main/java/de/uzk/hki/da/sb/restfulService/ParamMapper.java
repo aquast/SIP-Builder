@@ -72,7 +72,7 @@ public class ParamMapper {
 			}
 			sipFactory.setForbiddenFileExtensions(ignoreList);
 		}
-
+		
 		return sipFactory;
 	}
 

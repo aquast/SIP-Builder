@@ -43,14 +43,19 @@ public class SipBuilderParam {
 	private static void loadDefaultProp(){
 		bProp = new Properties();
 		
-		InputStream paramStream =  bProp.getClass().getResourceAsStream("conf/defaultParam.properties");
-		try {
-			bProp.load(paramStream);
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			createDefaultProperties();
-		} 
+		
+		InputStream paramStream =  bProp.getClass().getResourceAsStream("/conf/defaultParam.properties");
+
+		if(paramStream != null){
+			try {
+				bProp.load(paramStream);
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+				createDefaultProperties();
+			} 
+			
+		}
 	}
 	
 	private static void createDefaultProperties(){
