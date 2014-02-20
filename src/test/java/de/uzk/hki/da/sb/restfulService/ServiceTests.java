@@ -3,13 +3,20 @@
  */
 package de.uzk.hki.da.sb.restfulService;
 
+import org.apache.log4j.Logger;
 import org.junit.Test;
+
+import de.uzk.hki.da.sb.restfulClient.ClientTests;
+
 
 /**
  * @author aquast
  *
  */
 public class ServiceTests {
+
+	// Initiate Logger for TestRestClient
+	private static Logger log = Logger.getLogger(ServiceTests.class);
 
 	/**
 	 * 

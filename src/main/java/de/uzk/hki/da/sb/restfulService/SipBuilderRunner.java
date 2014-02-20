@@ -50,6 +50,16 @@ public class SipBuilderRunner {
 		
 		sip.startSIPBuilding();
 		
+    	do { 
+    		try {
+				Thread.sleep(500);
+			} catch (InterruptedException e) {
+				break;
+			}
+    	} while (sip.isWorking());
+    	
+
+		
 	}
 
 }
