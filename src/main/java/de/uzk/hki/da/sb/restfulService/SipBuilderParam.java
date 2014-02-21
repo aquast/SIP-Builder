@@ -72,7 +72,7 @@ public class SipBuilderParam {
 		// bProp.setProperty("single", "dummy SIPName"); // not supported by restful service!
 		bProp.setProperty("collection", "http://localhost/sip" + "/result/collection"); // if is set, bundle created sips to one delivery 
 		bProp.setProperty("modOverwrite", "never"); // should we overwrite an existing sip with the newly generated?		
-		bProp.setProperty("ignoreFileExtension", "html;rtf;doc;odt"); // files that should not be part of sip
+		bProp.setProperty("ignoreFileExtension", "rtf;doc;odt"); // files that should not be part of sip
 		bProp.setProperty("ignoreZeroByteFiles", "true");
 	}
 

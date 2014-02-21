@@ -24,12 +24,16 @@ public class RestProgressManager extends ProgressManager {
 		// TODO Auto-generated constructor stub
 	}
 
+	public void showMessage(String message){
+		log.info(message);
+	}
+	
 	/* (non-Javadoc)
 	 * @see de.uzk.hki.da.sb.ProgressManager#abort()
 	 */
 	@Override
 	public void abort() {
-		// TODO Auto-generated method stub
+		log.error("SIP-Building aborted");
 
 	}
 

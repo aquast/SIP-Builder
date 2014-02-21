@@ -3,6 +3,7 @@
  */
 package de.uzk.hki.da.sb.restfulService;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -36,10 +37,12 @@ public class ParamMapper {
     	sipFactory.setCreateCollection(false);
     	sipFactory.setIgnoreZeroByteFiles(true);
     	sipFactory.setCompress(true);
+    	sipFactory.setName("package");
 
 		// set mandatory Params
     	sipFactory.setSourcePath(sbParam.getProperty("source"));
 		sipFactory.setDestinationPath(sbParam.getProperty("destination"));
+		sipFactory.setRightsSourcePremisFile(new File(sbParam.getProperty("rights")));
 		
 		// TODO clarify if this code block is required for Restful Services:
 		if(sbParam.getProperties().containsKey("modSingleOrMultiple") 

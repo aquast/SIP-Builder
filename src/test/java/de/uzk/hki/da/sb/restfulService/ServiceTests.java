@@ -33,7 +33,12 @@ public class ServiceTests {
 		String fileListUrl = "http://nyx.hbz-nrw.de/hkiSB/InListFile.txt";
 		String paramFileUrl = "http://nyx.hbz-nrw.de/hkiSB/sipBuilderParams.txt";
 		String rightsFileUrl = "http://nyx.hbz-nrw.de/hkiSB/standardRights.xml";
+
+		fileListUrl = "http://localhost/hkiSB/filelist.txt";
+		paramFileUrl = "http://localhost/hkiSB/param.txt";
+		rightsFileUrl = "http://localhost/hkiSB/standardRights.xml";
 		cU.postConvertFromUrl(fileListUrl, paramFileUrl, rightsFileUrl);
+
 	}
 	
 	/**

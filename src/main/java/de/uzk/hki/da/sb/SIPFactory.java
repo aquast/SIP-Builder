@@ -135,14 +135,18 @@ public class SIPFactory {
 
 		switch (kindofSIPBuilding) {
 		case MULTIPLE_FOLDERS:
+			messageWriter.showMessage("multi");
 			List<File> folderContent = Arrays.asList(sourceFolder.listFiles());
 			for (File file : folderContent) {
+				messageWriter.showMessage(file.getAbsolutePath());
 				if (!file.isHidden() && file.isDirectory())
+					messageWriter.showMessage("added " + file.getAbsolutePath());
 					folderList.add(file);
 			}
 			break;
 
 		case SINGLE_FOLDER:
+			messageWriter.showMessage("single");
 			folderList.add(sourceFolder);
 			break;
 
@@ -194,6 +198,7 @@ public class SIPFactory {
 
 		progressManager.startJob(jobId);
 		Feedback feedback;
+
 
 		String packageName = getPackageName(sourceFolder);
 
@@ -664,7 +669,7 @@ public class SIPFactory {
 		 * Creates one ore more SIPs as specified by the user
 		 */
 		public void run() {
-
+			
 			alwaysOverwrite = false;
 			skippedFiles = false;				 
 			messageWriter.resetZeroByteFiles();
@@ -706,6 +711,7 @@ public class SIPFactory {
 			for (File folder : folderList) {
 				returnCode = buildSIP(id, folder);
 
+				messageWriter.showMessage("Teste die einzelnen Dateien");
 				if (returnCode != Feedback.SUCCESS && returnCode != Feedback.DELETE_TEMP_FOLDER_WARNING)
 					abortSipBuilding();
 
@@ -740,12 +746,14 @@ public class SIPFactory {
 				case ABORT:
 					return;
 				default:
+					messageWriter.showMessage("Keine Probleme im Sourcefolder gefunden");
 					break;
 				}
 
 				id++;
 			}
 			
+
 			if (listCreationTempFolder != null && listCreationTempFolder.exists())
 				FileUtils.deleteQuietly(listCreationTempFolder);
 

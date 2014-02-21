@@ -39,7 +39,7 @@ public class ConvertFromUrl {
 	@Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
 	public SipBuilderResult postConvertFromUrl(@QueryParam("fileList") String fileListUrl, 
 			@QueryParam("parameterFile") String paramFileUrl,
-			@QueryParam("rigths") String rightsFileUrl){
+			@QueryParam("rights") String rightsFileUrl){
 		SipBuilderResult response = null;
 
 		// copy parameter file to server
@@ -53,6 +53,8 @@ public class ConvertFromUrl {
 		// copy filelist file to server
 		String fileListName = FileUtil.saveUrlToFile(fileIdent + "/filelist.txt", fileListUrl);
 
+		// copy rights file to server
+		String fileRights = FileUtil.saveUrlToFile(fileIdent + "/rights.xml", rightsFileUrl);
 		
 		response = convertFromUrl(builderProp, fileListName);
 		
@@ -66,8 +68,9 @@ public class ConvertFromUrl {
 		Properties builderProp = SipBuilderParam.getDefaultProperties();
 		
 		// set actual local paths
-		builderProp.setProperty("source", Configuration.getTempDirPath() + "/" + fileIdent + "/source/" );
-		builderProp.setProperty("destination", Configuration.getTempDirPath() + "/" + fileIdent + "/result/" );
+		builderProp.setProperty("source", Configuration.getTempDirPath() + fileIdent + "/source/" );
+		builderProp.setProperty("destination", Configuration.getTempDirPath() + fileIdent + "/result/" );
+		builderProp.setProperty("rights", Configuration.getTempDirPath() + fileIdent + "/rights.xml");
 		// now try to read in Properties from ParamFile
         try {
     		log.info("Reading Parameters File: " + fileName);
@@ -120,23 +123,6 @@ public class ConvertFromUrl {
 		SipBuilderRunner sbRunner = new SipBuilderRunner();
 		sbRunner.execute(paramProp);
 
-		/*
-		builderResult.setInputFileUrl(inputFileUrl);
-
-		String reportFile = Configuration.getResultDirPath() + fileName.replace(".pdf", "." + paramType.getReportFormat()[0].getValue().toLowerCase());
-
-		log.info(reportFile);
-		//append report if report exists
-		if(new File(reportFile).isFile()){
-			builderResult.setReportFileUrl(Configuration.getResultDirUrl() + fileName.replace(".pdf", "." + paramType.getReportFormat()[0].getValue().toLowerCase()));
-		}else{
-			builderResult.setReportFileUrl("no report file generated");
-		}
-		
-
-		if(sbRunner.getExitState() != null && sbRunner.getExitState().equals("0")){
-			pResultsetResultFileUrl(Configuration.getResultDirUrl() + fileName);
-		}*/
 		return builderResult;
 
 		
