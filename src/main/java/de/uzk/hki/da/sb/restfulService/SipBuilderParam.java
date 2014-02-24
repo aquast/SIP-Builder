@@ -68,7 +68,7 @@ public class SipBuilderParam {
 		
 		
 		//set processing Params
-		bProp.setProperty("modSingleOrMultiple", "multiple"); // generate either one SIP for each subdirectory or a single SIP for all the sub tree
+		bProp.setProperty("modSingleOrMultiple", "single"); // generate either one SIP for each subdirectory or a single SIP for all the sub tree
 		// bProp.setProperty("single", "dummy SIPName"); // not supported by restful service!
 		bProp.setProperty("collection", "http://localhost/sip" + "/result/collection"); // if is set, bundle created sips to one delivery 
 		bProp.setProperty("modOverwrite", "never"); // should we overwrite an existing sip with the newly generated?		

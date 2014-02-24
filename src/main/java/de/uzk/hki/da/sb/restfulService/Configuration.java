@@ -57,12 +57,15 @@ public class Configuration {
 	}
 
 	private static void setTempDirUrl(){
-		 tempDirUrl = serviceUrl + sysProp.getProperty("tempDir") + "/";
+		 tempDirUrl = "http://" + sysProp.getProperty("host") + ":" 
+					+ sysProp.getProperty("port") + "/"
+					+ sysProp.getProperty("tempDir") + "/";
 	}
 	
 	private static void setResultDirUrl(){
-		resultDirUrl = serviceUrl + sysProp.getProperty("resultDir")  + "/";
-		
+		 resultDirUrl = "http://" + sysProp.getProperty("host") + ":" 
+					+ sysProp.getProperty("port") + "/"
+					+ sysProp.getProperty("tempDir") + "/";
 	}
 	
 	private static void setServiceUrl(){

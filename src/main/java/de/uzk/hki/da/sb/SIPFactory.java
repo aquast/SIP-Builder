@@ -305,15 +305,24 @@ public class SIPFactory {
 		progressManager.premisProgress(jobId, 0.0);
 
 		File premisFile = new File(folder, "data" + File.separator + "premis.xml");
+		//logger.log(folder.getAbsolutePath());
 
 		XmlWriter premisWriter = new XmlWriter();
+		System.out.println("\nattributes: \n" 
+				+ "premisFile: " + premisFile.getAbsolutePath() 
+				+ ", \nFolder: " + folder.getAbsolutePath()
+				+ ", \nRightsSource: " + rightsSourcePremisFile.getAbsolutePath()
+				+ ", \nPackageName: " + packageName);
 		try {
-			if (rightsSourcePremisFile != null)
+			if (rightsSourcePremisFile != null){
 				premisWriter.createPremisFile(this, premisFile, rightsSourcePremisFile, packageName);
-			else
-				premisWriter.createPremisFile(this, premisFile, packageName);
+			}else{
+				premisWriter.createPremisFile(this, premisFile, packageName);				
+			}
 		} catch (Exception e) {
-			logger.log("ERROR: Failed to create premis file " + premisFile.getAbsolutePath(), e);
+			System.out.println(e);
+			e.printStackTrace();
+			//logger.log("ERROR: Failed to create premis file " + premisFile.getAbsolutePath(), e);
 			return Feedback.PREMIS_ERROR;
 		}
 
@@ -645,6 +654,10 @@ public class SIPFactory {
 
 	public Feedback getReturnCode() {
 		return returnCode;
+	}
+
+	public int getReturnCodeInt() {
+		return returnCode.value;
 	}
 
 	public boolean getCompress() {

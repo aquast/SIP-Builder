@@ -6,9 +6,6 @@ package de.uzk.hki.da.sb.restfulService;
 import org.apache.log4j.Logger;
 import org.junit.Test;
 
-import de.uzk.hki.da.sb.restfulClient.ClientTests;
-
-
 /**
  * @author aquast
  *
@@ -34,10 +31,14 @@ public class ServiceTests {
 		String paramFileUrl = "http://nyx.hbz-nrw.de/hkiSB/sipBuilderParams.txt";
 		String rightsFileUrl = "http://nyx.hbz-nrw.de/hkiSB/standardRights.xml";
 
-		fileListUrl = "http://localhost/hkiSB/filelist.txt";
-		paramFileUrl = "http://localhost/hkiSB/param.txt";
-		rightsFileUrl = "http://localhost/hkiSB/standardRights.xml";
-		cU.postCreateSingleSip(fileListUrl, paramFileUrl, rightsFileUrl);
+		//fileListUrl = "http://localhost/hkiSB/filelist.txt";
+		//paramFileUrl = "http://localhost/hkiSB/param.txt";
+		//rightsFileUrl = "http://localhost/hkiSB/standardRights.xml";
+		SipBuilderResult result = cU.postCreateSingleSip(fileListUrl, paramFileUrl, rightsFileUrl);
+		
+		log.info(result.getExitStateInt());
+		log.info(result.getSipFileUrl());
+
 
 	}
 	
@@ -50,12 +51,15 @@ public class ServiceTests {
 		String rightsFileUrl = "http://nyx.hbz-nrw.de/hkiSB/standardRights.xml";
 		String packageName = "testPackage";
 
-		fileListUrl = "http://localhost/hkiSB/filelist.txt";
-		paramFileUrl = "http://localhost/hkiSB/param.txt";
-		rightsFileUrl = "http://localhost/hkiSB/standardRights.xml";
+		//fileListUrl = "http://localhost/hkiSB/filelist.txt";
+		//paramFileUrl = "http://localhost/hkiSB/param.txt";
+		//rightsFileUrl = "http://localhost/hkiSB/standardRights.xml";
 		
-		cU.postCreateNamedSingleSip(fileListUrl, paramFileUrl, rightsFileUrl, packageName);
-
+		SipBuilderResult result = cU.postCreateNamedSingleSip(fileListUrl, paramFileUrl, rightsFileUrl, packageName);
+		
+		log.info(result.getExitStateInt());
+		log.info(result.getSipFileUrl());
+		
 	}
 
 	/**

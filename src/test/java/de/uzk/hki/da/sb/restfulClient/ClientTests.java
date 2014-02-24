@@ -33,12 +33,29 @@ public class ClientTests {
 	}
 
 	
-	@Test public void testConvertFromUrl(){
+	@Test public void testCreateSingleSip(){
 		Client client = createClient();
 		WebResource wResource = client.resource(uri + "api/createSingleSip");
 		wResource = wResource.queryParam("fileList", "http://nyx.hbz-nrw.de/hkiSB/InListFile.txt")
 			.queryParam("parameterFile", "http://nyx.hbz-nrw.de/hkiSB/sipBuilderParams.txt")
 			.queryParam("rights", "http://nyx.hbz-nrw.de/hkiSB/standardRights.xml");
+		
+		log.info(wResource);
+		log.info(wResource.post(String.class).toString());
+		
+		
+		
+	}
+
+	
+	@Test public void testCreateNamedSingleSip(){
+		Client client = createClient();
+		WebResource wResource = client.resource(uri + "api/createSingleSip");
+		wResource = wResource.queryParam("fileList", "http://nyx.hbz-nrw.de/hkiSB/InListFile.txt")
+			.queryParam("parameterFile", "http://nyx.hbz-nrw.de/hkiSB/sipBuilderParams.txt")
+			.queryParam("rights", "http://nyx.hbz-nrw.de/hkiSB/standardRights.xml")
+			.queryParam("packageName", "test_package")
+			;
 		
 		log.info(wResource);
 		log.info(wResource.post(String.class).toString());
@@ -61,7 +78,8 @@ public class ClientTests {
 	public static void main(String[] args) {
 		
 		ClientTests cTest = new ClientTests();
-		cTest.testConvertFromUrl();
+		cTest.testCreateSingleSip();
+		cTest.testCreateNamedSingleSip();
 		
 	}
 

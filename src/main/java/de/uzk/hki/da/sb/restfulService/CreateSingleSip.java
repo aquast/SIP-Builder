@@ -41,22 +41,11 @@ public class CreateSingleSip {
 			@QueryParam("parameterFile") String paramFileUrl,
 			@QueryParam("rights") String rightsFileUrl){
 		SipBuilderResult response = null;
-
-		// copy parameter file to server
-		fileIdent = TimePrefix.getTimePrefix();
-		String paramFileName = FileUtil.saveUrlToFile(fileIdent + "/param.txt", paramFileUrl);
-		log.info(paramFileName);
-
-		// read in parameters from file
-		Properties builderProp = readProperties(paramFileName);
-
-		// copy filelist file to server
-		String fileListName = FileUtil.saveUrlToFile(fileIdent + "/filelist.txt", fileListUrl);
-
-		// copy rights file to server
-		String fileRights = FileUtil.saveUrlToFile(fileIdent + "/rights.xml", rightsFileUrl);
 		
-		response = createSingleSip(builderProp, fileListName);
+		String packageName = "package"; 
+	
+		// delegate to postCreateNamedSingleSip
+		response = postCreateNamedSingleSip(fileListUrl, paramFileUrl, rightsFileUrl, packageName);
 		
 		return response;
 	}
@@ -81,7 +70,11 @@ public class CreateSingleSip {
 		
 		// insert PackageName into Properties
 		builderProp.setProperty("packageName", packageName);
-
+		
+		// service requires being setted to mod single
+		builderProp.setProperty("modSingleOrMultiple", "single");
+		
+		
 		// copy filelist file to server
 		String fileListName = FileUtil.saveUrlToFile(fileIdent + "/filelist.txt", fileListUrl);
 
@@ -154,6 +147,9 @@ public class CreateSingleSip {
 		SipBuilderRunner sbRunner = new SipBuilderRunner();
 		sbRunner.execute(paramProp);
 
+		builderResult = new SipBuilderResult(fileIdent + "/result/"
+				+ paramProp.getProperty("packageName") + ".tgz");
+		builderResult.setExitStateInt(sbRunner.getExitState());
 		return builderResult;
 
 		

@@ -7,6 +7,7 @@ import de.uzk.hki.da.sb.RestMessageWriter;
 import de.uzk.hki.da.sb.RestProgressManager;
 import de.uzk.hki.da.sb.SIPFactory;
 
+import java.util.Enumeration;
 import java.util.Properties;
 
 /**
@@ -16,7 +17,7 @@ import java.util.Properties;
 public class SipBuilderRunner {
 
 	private SIPFactory sip = new SIPFactory();
-	private String exitState = null;
+	private int exitState = -1;
 
 	/**
 	 * 
@@ -32,8 +33,7 @@ public class SipBuilderRunner {
 		return sipC;
 	}
 	
-	public String getExitState() {
-		// TODO Auto-generated method stub
+	public int getExitState() {
 		return exitState;
 	}
 
@@ -58,6 +58,8 @@ public class SipBuilderRunner {
 			}
     	} while (sip.isWorking());
     	
+    	exitState = sip.getReturnCodeInt();
+    	rMessageWriter.showMessage("Finished SIP Building", exitState);
 
 		
 	}

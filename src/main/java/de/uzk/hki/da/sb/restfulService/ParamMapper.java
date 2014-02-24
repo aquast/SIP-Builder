@@ -7,6 +7,9 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.log4j.Logger;
+
+import de.uzk.hki.da.sb.RestProgressManager;
 import de.uzk.hki.da.sb.SIPFactory;
 
 /**
@@ -22,6 +25,9 @@ public class ParamMapper {
 		// TODO Auto-generated constructor stub
 	}
 	
+	// Initiate Logger for TestRestClient
+	private static Logger log = Logger.getLogger(ParamMapper.class);
+
 	/**
 	 * <p><em>Title: </em></p>
 	 * <p>Description: method adds Parameters to SIPFactory, using SipBuilderParam</p>
@@ -41,6 +47,7 @@ public class ParamMapper {
 
 		// set mandatory Params
     	sipFactory.setSourcePath(sbParam.getProperty("source"));
+		log.info(sbParam.getProperty("destination"));
 		sipFactory.setDestinationPath(sbParam.getProperty("destination"));
 		sipFactory.setRightsSourcePremisFile(new File(sbParam.getProperty("rights")));
 		

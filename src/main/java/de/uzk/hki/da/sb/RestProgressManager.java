@@ -5,9 +5,6 @@ package de.uzk.hki.da.sb;
 
 import org.apache.log4j.Logger;
 
-import de.uzk.hki.da.sb.ProgressManager.SIPCreationJob;
-import de.uzk.hki.da.sb.restfulService.ServiceTests;
-
 /**
  * @author aquast
  *

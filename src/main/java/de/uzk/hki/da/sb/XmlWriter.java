@@ -638,7 +638,7 @@ class XmlWriter {
 				break;
 
 			case XMLStreamConstants.END_DOCUMENT:
-				streamReader.close();
+				//streamReader.close();
 				try {
 					inputStream.close();
 				} catch (IOException e) {
@@ -650,6 +650,10 @@ class XmlWriter {
 				break;
 			}
 		}
+		
+		// streamReader will be closed if while loop is finished
+		streamReader.close();
+
 	}
 	
 	private String formatDate(Date date, SimpleDateFormat format) {

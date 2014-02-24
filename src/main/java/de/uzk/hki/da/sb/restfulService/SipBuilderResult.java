@@ -38,26 +38,63 @@ import javax.xml.bind.annotation.XmlRootElement;
 public class SipBuilderResult {
 
 	
-	private String inputFileUrl = null;
-	private String resultFileUrl = null;
+	private String resultTempPath = null;
+	private String sipFileUrl = null;
 	private int exitStateInt = 0;
-	private String exitState = null;
 
-	
-	
+
 	/**
 	 * 
 	 */
 	public SipBuilderResult() {
-		// TODO Auto-generated constructor stub
+
+	}
+
+	/**
+	 * 
+	 */
+	public SipBuilderResult(String resultTempPath) {
+		this.resultTempPath = resultTempPath;
+		createSipFileUrl();
+	}
+
+	
+	private void createSipFileUrl(){
+		if(sipFileUrl == null && resultTempPath != null){
+			sipFileUrl = Configuration.getResultDirUrl() + resultTempPath;
+			
+		}
+	}
+	
+	public String getResultTempPath() {
+		return resultTempPath;
+	}
+
+	public void setResultTempPath(String resultTempPath) {
+		this.resultTempPath = resultTempPath;
+	}
+
+	public String getSipFileUrl() {
+		return sipFileUrl;
 	}
 
 
 
-	public void setReportFileUrl(String string) {
-		// TODO Auto-generated method stub
-		
+	public void setSipFileUrl(String sipFileUrl) {
+		this.sipFileUrl = sipFileUrl;
+	}
+
+
+
+	public int getExitStateInt() {
+		return exitStateInt;
+	}
+
+
+
+	public void setExitStateInt(int exitStateInt) {
+		this.exitStateInt = exitStateInt;
 	}
 	
-	
+
 }
