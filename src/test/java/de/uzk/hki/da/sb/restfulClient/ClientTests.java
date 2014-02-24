@@ -35,7 +35,7 @@ public class ClientTests {
 	
 	@Test public void testConvertFromUrl(){
 		Client client = createClient();
-		WebResource wResource = client.resource(uri + "api/convertFromUrl");
+		WebResource wResource = client.resource(uri + "api/createSingleSip");
 		wResource = wResource.queryParam("fileList", "http://nyx.hbz-nrw.de/hkiSB/InListFile.txt")
 			.queryParam("parameterFile", "http://nyx.hbz-nrw.de/hkiSB/sipBuilderParams.txt")
 			.queryParam("rights", "http://nyx.hbz-nrw.de/hkiSB/standardRights.xml");

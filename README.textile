@@ -1,0 +1,51 @@
+h1. About
+
+This README describes the RESTful API added to SIPBuilder Tool. The API is providing web services for building Submission Input Packages (SIPs) according the bagit format used for the DA NRW Software suite. 
+
+h1. Releases
+
+0.1 first basic working release
+
+h1. Status
+
+Software is alpha. Basic functionalities are implemented. Mayor functionalities are still missing, e.g. RESTful Responses.  
+
+h1. License
+
+According SIP-Builder Licence. See...
+
+h1. Install
+
+SiPBuilder with RESTful API can be deployed as a standalone WebArchive (war) container within the Tomcat Web-Application Server. To generate the war-container please run mvn clean compile war:war
+
+h1. Usage
+
+RESTful operations provides Sip building for single SIPs actually. Batch creation is not supported until now. 
+
+h2. Service URL
+
+http://mydomain:8080/hkiSB/api
+
+h3. Service /createSingleSip
+
+h4. Short Description
+
+* method: POST
+* returns: xml, json
+* call: /createSingleSip?fileList=<Url of file containing all files to be assemblaged in the SIP>&parameterFile=<Url of file providing building parameters>&rigths=<Url to file with usage rights>
+
+h4. Curl Example
+
+@curl \-v \-H "Accept: application/json" \-X POST \-\-url "http://mydomain:8080/hkiSB/api/createSingleSip?fileList=http://nyx.hbz-nrw.de/hkiSB/InListFile.txt&parameterFile=http://nyx.hbz-nrw.de/hkiSB/sipBuilderParams.txt&rights=http://nyx.hbz-nrw.de/hkiSB/standardRights.xml"@ 
+
+h3. Service /createNamedSingleSip
+
+h4. Short Description
+
+* method POST
+* returns: json, xml
+* call: /createNamedSingleSip?fileList=<Url of file containing all files to be assemblaged in the SIP>&parameterFile=<Url of file providing building parameters>&rigths=<Url to file with usage rights>&packageName=<The name used for naming the newly builded SIP>
+
+h4. Curl Example
+
+@curl \-v \-H "Accept: application/json" \-X POST \-\-url "http://mydomain:8080/hkiSB/api/createSingleSip?fileList=http://nyx.hbz-nrw.de/hkiSB/InListFile.txt&parameterFile=http://nyx.hbz-nrw.de/hkiSB/sipBuilderParams.txt&rights=http://nyx.hbz-nrw.de/hkiSB/standardRights.xml&packageName=testPackage"@ 

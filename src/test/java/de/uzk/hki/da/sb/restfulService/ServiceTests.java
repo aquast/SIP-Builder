@@ -26,8 +26,8 @@ public class ServiceTests {
 	}
 
 	
-	@Test public void testConvertFromUrl(){
-		ConvertFromUrl cU = new ConvertFromUrl();
+	@Test public void testCreateSingleSip(){
+		CreateSingleSip cU = new CreateSingleSip();
 		
 		
 		String fileListUrl = "http://nyx.hbz-nrw.de/hkiSB/InListFile.txt";
@@ -37,16 +37,34 @@ public class ServiceTests {
 		fileListUrl = "http://localhost/hkiSB/filelist.txt";
 		paramFileUrl = "http://localhost/hkiSB/param.txt";
 		rightsFileUrl = "http://localhost/hkiSB/standardRights.xml";
-		cU.postConvertFromUrl(fileListUrl, paramFileUrl, rightsFileUrl);
+		cU.postCreateSingleSip(fileListUrl, paramFileUrl, rightsFileUrl);
 
 	}
 	
+	@Test public void testCreateNamedSingleSip(){
+		CreateSingleSip cU = new CreateSingleSip();
+		
+		
+		String fileListUrl = "http://nyx.hbz-nrw.de/hkiSB/InListFile.txt";
+		String paramFileUrl = "http://nyx.hbz-nrw.de/hkiSB/sipBuilderParams.txt";
+		String rightsFileUrl = "http://nyx.hbz-nrw.de/hkiSB/standardRights.xml";
+		String packageName = "testPackage";
+
+		fileListUrl = "http://localhost/hkiSB/filelist.txt";
+		paramFileUrl = "http://localhost/hkiSB/param.txt";
+		rightsFileUrl = "http://localhost/hkiSB/standardRights.xml";
+		
+		cU.postCreateNamedSingleSip(fileListUrl, paramFileUrl, rightsFileUrl, packageName);
+
+	}
+
 	/**
 	 * @param args
 	 */
 	public static void main(String[] args) {
 		ServiceTests servTest = new ServiceTests();
-		servTest.testConvertFromUrl();
+		servTest.testCreateSingleSip();
+		servTest.testCreateNamedSingleSip();
 		
 
 	}

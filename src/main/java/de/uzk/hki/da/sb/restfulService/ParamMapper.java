@@ -67,6 +67,11 @@ public class ParamMapper {
 			sipFactory.setKindofSIPBuilding(SIPFactory.KindOfSIPBuilding.MULTIPLE_FOLDERS);
 		}
 
+		if(sbParam.getProperties().containsKey("packageName") 
+				&& !sbParam.getProperty("packageName").isEmpty()){
+			sipFactory.setName(sbParam.getProperty("packageName"));
+		}
+
 		if(sbParam.getProperties().containsKey("ignoreFileExtension")){
 			String[] ignoreExt = sbParam.getProperty("ignoreFileExtension").split(";");
 			ArrayList<String> ignoreList = new ArrayList<String>();
